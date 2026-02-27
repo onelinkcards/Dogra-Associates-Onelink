@@ -72,7 +72,7 @@ export default function GoogleReviews() {
   // Show skeleton loader
   if (loading) {
     return (
-      <section id="reviews" className="w-full max-w-md mx-auto px-4 pt-8 pb-6">
+      <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
         <div className="flex items-center justify-between mb-5 px-2">
           <h2 className="text-2xl font-bold text-white tracking-tight">
             Google Reviews
@@ -94,14 +94,14 @@ export default function GoogleReviews() {
   // Show error state with message
   if (error || (!reviewsData && !loading)) {
     return (
-      <section id="reviews" className="w-full max-w-md mx-auto px-4 pt-8 pb-6">
+      <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
         <div className="flex items-center justify-between mb-5 px-2">
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Google Reviews
           </h2>
           <Link
             href="/reviews"
-            className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+            className="text-sm font-semibold text-white hover:text-white/90 transition-colors flex items-center gap-1"
           >
             View All
             <ChevronRight className="w-4 h-4" />
@@ -113,7 +113,7 @@ export default function GoogleReviews() {
           </p>
           <Link
             href="/reviews"
-            className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2 px-4 rounded-xl transition-all"
+            className="inline-block bg-mango-green hover:bg-mango-greenSoft text-white font-semibold py-2 px-4 rounded-xl transition-all"
           >
             View Reviews Page
           </Link>
@@ -127,14 +127,14 @@ export default function GoogleReviews() {
   const displayReviews = reviewsData.reviews.slice(0, 2)
 
   return (
-    <section id="reviews" className="w-full max-w-md mx-auto px-4 pt-8 pb-6">
+    <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
       <div className="flex items-center justify-between mb-5 px-2">
         <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
           Google Reviews
         </h2>
         <Link
           href="/reviews"
-          className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+          className="text-sm font-semibold text-white hover:text-white/90 transition-colors flex items-center gap-1"
         >
           View All
           <ChevronRight className="w-4 h-4" />
@@ -203,7 +203,7 @@ export default function GoogleReviews() {
                 <div 
                   className="w-10 h-10 rounded-full flex items-center justify-center"
                   style={{
-                    background: 'linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%)'
+                    background: 'linear-gradient(135deg, #2F6B55 0%, #1E4D3D 100%)'
                   }}
                 >
                   <span className="text-white font-semibold text-sm">
@@ -268,7 +268,7 @@ export default function GoogleReviews() {
           href="/reviews#write-review"
           className="block w-full font-semibold py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
           style={{
-            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+            background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)',
             color: 'white'
           }}
         >

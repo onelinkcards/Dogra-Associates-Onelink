@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Clock, Store, Hand, CreditCard, Fish, Waves, Calendar, Shield, Sparkles, Truck } from 'lucide-react'
+import { MapPin, Clock, Store, Hand } from 'lucide-react'
 import { shopConfig, ContactPerson } from '../config'
 import ActionsRow, { ActionsRowRef } from './ActionsRow'
 import Card3D, { Face } from '../../../components/Card3D'
@@ -56,6 +56,15 @@ export default function Hero() {
     }, 850)
   }
 
+  // Open payment face when returning from menu page (Proceed to Payment)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (sessionStorage.getItem('openPayment')) {
+      sessionStorage.removeItem('openPayment')
+      const t = setTimeout(handleOpenPayments, 150)
+      return () => clearTimeout(t)
+    }
+  }, [])
 
   return (
     <motion.section
@@ -113,16 +122,15 @@ export default function Hero() {
               </motion.button>
             )}
 
-            {/* Header with Fish Image */}
+            {/* Header – single image only */}
             <div className="relative h-40 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
               <Image
-                src="/fish-category.jpg"
-                alt="Fresh Fish"
+                src="/unnamed.webp"
+                alt="Mango Restaurant"
                 fill
                 className="object-cover"
                 priority
               />
-              {/* Black gradient from bottom fading upward */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
             </div>
 
@@ -151,7 +159,7 @@ export default function Hero() {
               }}
             >
               {/* Instagram - Opens selector */}
-              {(shopConfig.social?.instagram || shopConfig.social?.instagramJammu) && (
+              {shopConfig.social?.instagram && (
                 <motion.button
                   data-instagram-button
                   whileHover={{ scale: 1.05 }}
@@ -159,10 +167,7 @@ export default function Hero() {
                   onClick={(e) => {
                     e.stopPropagation()
                     e.preventDefault()
-                    // Open Instagram selector
-                    if (actionsRowRef.current) {
-                      actionsRowRef.current.openInstagramSelector()
-                    }
+                    window.open(shopConfig.social.instagram, '_blank', 'noopener,noreferrer')
                   }}
                   className="h-11 w-11 p-0.5 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-all cursor-pointer touch-manipulation"
                   style={{
@@ -170,7 +175,7 @@ export default function Hero() {
                     WebkitTapHighlightColor: 'transparent',
                     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)'
                   }}
-                  title="Instagram"
+                  title="Follow @mangojammu"
                 >
                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
                     <Image
@@ -182,31 +187,6 @@ export default function Hero() {
                     />
                   </div>
                 </motion.button>
-              )}
-              
-              {/* Facebook */}
-              {shopConfig.social?.facebook && (
-                <motion.a
-                  href={shopConfig.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    e.preventDefault()
-                    window.open(shopConfig.social.facebook, '_blank', 'noopener,noreferrer')
-                  }}
-                  className="h-11 w-11 p-0 rounded-full shadow-2xl border-2 border-[#1877F2] flex items-center justify-center overflow-hidden transition-all cursor-pointer bg-white touch-manipulation"
-                  style={{ 
-                    WebkitTapHighlightColor: 'transparent',
-                    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)'
-                  }}
-                >
-                  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="#1877F2">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </motion.a>
               )}
               
               {/* WhatsApp - Opens Selector in Card */}
@@ -252,26 +232,23 @@ export default function Hero() {
                 }}
                 transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl overflow-hidden"
-                  style={{ 
-                    border: '4px solid rgba(31, 182, 217, 0.4)',
-                    boxShadow: '0 4px 20px rgba(14, 116, 144, 0.2)'
-                  }}
+                <div className="w-32 h-32 rounded-full flex items-center justify-center shadow-xl overflow-hidden bg-white p-1.5 border-2 border-slate-200/60"
+                  style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.12)' }}
                 >
                   <Image
                     src={shopConfig.assets.logo}
                     alt={`${shopConfig.name} Logo`}
                     width={128}
                     height={128}
-                    className="w-full h-full object-cover"
-                    style={{ transform: 'scale(1.2)' }}
+                    className="w-full h-full object-contain"
+                    style={{ transform: 'scale(1.25)' }}
                   />
                 </div>
               </motion.div>
 
-              {/* Brand info */}
+              {/* Brand info - MANGO + subtitle + keyword badges */}
               <motion.div 
-                className="pt-20 mb-5"
+                className="pt-20 mb-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -279,64 +256,21 @@ export default function Hero() {
                 <h1 className="text-2xl font-black text-slate-900 mb-1 leading-tight tracking-tight">
                   {shopConfig.name}
                 </h1>
-                <p className="text-blue-600 font-semibold text-[15px]">
+                <p className="text-mango-green font-semibold text-[15px] mb-3">
                   {shopConfig.tagline}
                 </p>
-              </motion.div>
-
-
-              {/* Trust Badges - Since 1968, Clean & Hygienic, Freshness Guaranteed, Free Home Delivery */}
-              <motion.div 
-                className="mb-6 flex flex-wrap gap-2"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                {/* First Badge - Since 1968 */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm border border-blue-200/40 shadow-sm" style={{ backgroundColor: 'rgba(239, 246, 255, 0.6)' }}>
-                  <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                    <Calendar className="w-3.5 h-3.5 text-blue-600" strokeWidth={2} />
+                {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {shopConfig.keywordBadges.map((badge: string) => (
+                      <span
+                        key={badge}
+                        className="inline-flex px-2.5 py-1 rounded-full bg-mango-lightGreen border border-mango-green/20 text-mango-green text-xs font-medium"
+                      >
+                        {badge}
+                      </span>
+                    ))}
                   </div>
-                  <span className="text-xs font-semibold text-slate-700">Since 1968</span>
-                </div>
-                
-                {/* Second Badge - Clean & Hygienic */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm border border-blue-200/40 shadow-sm" style={{ backgroundColor: 'rgba(239, 246, 255, 0.6)' }}>
-                  <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                    <Shield className="w-3.5 h-3.5 text-blue-600" strokeWidth={2} />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-700">Clean & Hygienic</span>
-                </div>
-                
-                {/* Third Badge - Freshness Guaranteed */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm border border-blue-200/40 shadow-sm" style={{ backgroundColor: 'rgba(239, 246, 255, 0.6)' }}>
-                  <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-600" strokeWidth={2} />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-700">Freshness Guaranteed</span>
-                </div>
-                
-                {/* Fourth Badge - Free Home Delivery with Internal Shine Animation */}
-                <a
-                  href="https://honeymoneyfish.co/order-online/menu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm cursor-pointer transition-all hover:shadow-md" 
-                  style={{ 
-                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                    border: '2px solid #DC2626',
-                    position: 'relative',
-                    overflow: 'hidden'
-                  }}
-                >
-                  {/* Internal shine effect */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-red-300/40 to-transparent animate-[shimmer_2s_infinite] pointer-events-none" />
-                  
-                  <div className="w-4 h-4 rounded-full flex items-center justify-center relative z-10">
-                    <Truck className="w-3.5 h-3.5 text-red-600" strokeWidth={2.5} />
-                  </div>
-                  <span className="text-xs font-extrabold text-red-600 relative z-10">Free Home Delivery</span>
-                </a>
+                )}
               </motion.div>
 
               {/* Actions */}
@@ -360,124 +294,114 @@ export default function Hero() {
         }
         faceInfo={
           <div
-            className="bg-gradient-to-br from-blue-400/80 via-blue-500/80 to-blue-600/80 backdrop-blur-md rounded-[24px] shadow-2xl border-2 border-blue-300/50 cursor-pointer relative h-full"
-            style={{ overflow: 'hidden', minHeight: '580px', boxSizing: 'border-box' }}
+            className="bg-gradient-to-br from-mango-green to-mango-greenSoft backdrop-blur-md rounded-[24px] shadow-2xl border-2 border-mango-green/50 cursor-pointer relative h-full overflow-hidden flex flex-col"
+            style={{ minHeight: '580px', boxSizing: 'border-box' }}
             onClick={handleFlip}
           >
-            {/* Animated Background Pattern */}
-            <motion.div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%)',
-              }}
-              animate={{
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* Content */}
-            <div className="relative flex flex-col items-center justify-center h-full px-6 py-8 text-center text-white">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={currentFace === 'info' ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-                className="w-full flex flex-col items-center"
-              >
-              {/* Title */}
-              <h2 className="text-2xl font-black mb-6 tracking-tight drop-shadow-lg">
-                Business Snapshot
-              </h2>
-
-              {/* Address */}
-              <div className="flex items-start gap-3 mb-3 w-full max-w-sm bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 drop-shadow-md" />
-                <p className="text-sm font-semibold leading-relaxed text-left drop-shadow-md">
-                  {shopConfig.contact.address}
-                </p>
-              </div>
-
-              {/* Deals */}
-              <div className="flex items-start gap-3 mb-3 w-full max-w-sm bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                <Store className="w-5 h-5 flex-shrink-0 mt-0.5 drop-shadow-md" />
-                <p className="text-sm leading-relaxed text-left drop-shadow-md">
-                  <span className="font-semibold">Services:</span> {shopConfig.brands.map(b => b.name).join(', ')}
-                </p>
-              </div>
-
-              {/* Hours */}
-              <div className="flex items-center gap-3 mb-6 w-full max-w-sm bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                <Clock className="w-5 h-5 flex-shrink-0 drop-shadow-md" />
-                <p className="text-sm font-medium text-left drop-shadow-md">
-                  {shopConfig.contact.storeHours}
-                </p>
-              </div>
-
-              {/* Google Maps Preview */}
-              <div 
-                className="w-full max-w-sm h-40 rounded-2xl overflow-hidden shadow-2xl mb-4 border-2 border-white/30 pointer-events-none"
-                style={{ borderRadius: '16px' }}
-              >
-                <iframe
-                  src={`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}&output=embed`}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, borderRadius: '16px', pointerEvents: 'none' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
-              {/* Open in Maps Button */}
-              <motion.a
-                href={`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-2 bg-white text-yellow-900 px-6 py-3 rounded-full shadow-2xl hover:shadow-xl transition-all font-bold border-2 border-white/50 overflow-hidden touch-manipulation pointer-events-auto"
-                onClick={(e) => {
-                  // Flip first, then open maps after delay
-                  e.preventDefault()
-                  handleFlip(e, true)
-                  setTimeout(() => {
-                    window.open(`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}`, '_blank', 'noopener,noreferrer')
-                  }, 700)
-                }}
-                style={{ fontSize: '14px', WebkitTapHighlightColor: 'transparent' }}
-              >
-                <MapPin className="w-5 h-5 transition-all group-hover:opacity-0 group-hover:scale-0" />
-                <span className="transition-all group-hover:opacity-0">Open in Maps</span>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                    <span className="text-lg">🏢</span>
-                  </div>
-                </div>
-              </motion.a>
-            </motion.div>
-
-            {/* Tap to Return Button */}
+            {/* Tap to Return – top-right inside container */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={currentFace === 'info' ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.3, delay: 0.3 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={handleFlip}
-                className="absolute top-4 right-4 text-xs text-white font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg cursor-pointer transition-all flex items-center gap-1.5 touch-manipulation"
-                style={{ WebkitTapHighlightColor: 'transparent' }}
-                aria-label={t('tapToReturn')}
-              >
-                <Hand className="w-3.5 h-3.5 text-white" />
-                <span style={{ fontSize: '12px' }}>{t('tapToReturn')}</span>
+              onClick={(e) => { e.stopPropagation(); handleFlip(e); }}
+              className="absolute top-4 right-4 z-10 text-xs text-white font-semibold bg-white/20 hover:bg-white/30 px-3 py-2 rounded-full backdrop-blur-md shadow-lg cursor-pointer transition-all flex items-center gap-1.5 touch-manipulation"
+              style={{ WebkitTapHighlightColor: 'transparent' }}
+              aria-label={t('tapToReturn')}
+            >
+              <Hand className="w-3.5 h-3.5 text-white" />
+              <span style={{ fontSize: '12px' }}>{t('tapToReturn')}</span>
             </motion.button>
+
+            {/* Animated Background Pattern */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%)',
+              }}
+              animate={{ opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Content – same width as main card, no scroll; fits within card like reference */}
+            <div className="relative flex-1 flex flex-col items-center min-h-0 px-4 pt-16 pb-5 text-white overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={currentFace === 'info' ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+                className="w-full flex flex-col items-center max-w-[calc(100%-2rem)] flex-shrink-0 min-h-[555px] mt-[3px] mb-[3px]"
+              >
+                {/* Title – centered below Tap to Return, slightly smaller, pushed down */}
+                <h2 className="text-[23px] sm:text-2xl font-black mb-[11px] pt-[7px] pb-[7px] h-[42px] tracking-wide text-white text-center w-full [text-shadow:0_1px_3px_rgba(0,0,0,0.25)]">
+                  Business Snapshot
+                </h2>
+
+                {/* Block 1: Location – same card depth & frosted style as reference */}
+                <div className="flex items-start gap-3 w-full mb-2 rounded-2xl p-3 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 drop-shadow-md text-white" />
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-sm font-bold leading-snug text-white/95">Location</p>
+                    <p className="text-sm leading-relaxed text-white/90">Shop No 32, B2 South Block, Bahu Plaza, Gandhi Nagar, Jammu, Jammu & Kashmir – 180004</p>
+                  </div>
+                </div>
+
+                {/* Block 2: Services – same card depth & frosted style */}
+                <div className="flex items-start gap-3 w-full mb-2 rounded-2xl p-3 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                  <Store className="w-5 h-5 flex-shrink-0 mt-0.5 drop-shadow-md text-white" />
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-sm font-bold leading-snug text-white/95">Services</p>
+                    <p className="text-sm leading-relaxed text-white/90">Dine-In • Takeaway • Pure Vegetarian</p>
+                  </div>
+                </div>
+
+                {/* Block 3: Timings – same card depth & frosted style */}
+                <div className="flex items-start gap-3 w-full mb-3 rounded-2xl p-3 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                  <Clock className="w-5 h-5 flex-shrink-0 mt-0.5 drop-shadow-md text-white" />
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-sm font-bold leading-snug text-white/95">Timings</p>
+                    <p className="text-sm leading-relaxed text-white/90">Monday – Saturday: 10:30 AM – 9:30 PM</p>
+                    <p className="text-sm leading-relaxed text-white/90">Sunday: 11:00 AM – 9:30 PM</p>
+                  </div>
+                </div>
+
+                {/* Google Map – same card depth, frosted border & shadow as info cards */}
+                <div className="w-full h-32 rounded-2xl overflow-hidden mb-3 pointer-events-none flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                  <iframe
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}&output=embed`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, pointerEvents: 'none' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+
+                {/* Open in Maps – centered pill button at bottom */}
+                <motion.a
+                  href={`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 bg-white/25 hover:bg-white/35 text-white font-semibold px-6 py-3 rounded-full border border-white/30 backdrop-blur-sm touch-manipulation pointer-events-auto shadow-[0_10px_25px_rgba(0,0,0,0.3)]"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleFlip(e, true)
+                    setTimeout(() => {
+                      window.open(`https://www.google.com/maps?q=${encodeURIComponent(shopConfig.contact.mapQuery)}`, '_blank', 'noopener,noreferrer')
+                    }, 700)
+                  }}
+                  style={{ fontSize: '14px', WebkitTapHighlightColor: 'transparent' }}
+                >
+                  <MapPin className="w-5 h-5" />
+                  Open in Maps
+                </motion.a>
+              </motion.div>
+            </div>
           </div>
-        </div>
         }
         facePayment={
           <PaymentFace

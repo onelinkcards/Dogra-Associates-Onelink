@@ -6,7 +6,7 @@ import { siteConfig } from '../data/site'
 
 export default function Footer() {
   return (
-    <footer className="w-full max-w-md mx-auto px-4 py-8">
+    <footer className="w-full max-w-md mx-auto px-2 py-8">
       <div className="text-center space-y-4">
         <p className="text-sm text-white font-medium">
           © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.

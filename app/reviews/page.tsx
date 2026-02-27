@@ -99,7 +99,7 @@ export default function ReviewsPage() {
         backgroundColor: 'rgba(255, 251, 243, 0.95)',
         borderColor: 'rgba(0, 0, 0, 0.1)'
       }}>
-        <div className="max-w-md mx-auto px-4 py-4 flex items-center gap-3">
+        <div className="max-w-md mx-auto px-2 py-4 flex items-center gap-3">
           <Link
             href="/#reviews"
             className="p-3 rounded-full transition-colors hover:bg-black/5"
@@ -116,7 +116,7 @@ export default function ReviewsPage() {
       </div>
 
       {/* Content */}
-      <div className="max-w-md mx-auto px-4 py-6">
+      <div className="max-w-md mx-auto px-2 py-6">
         {/* Review Us Button - At Top */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -165,7 +165,7 @@ export default function ReviewsPage() {
             </p>
             <Link
               href="/"
-              className="transition-colors font-medium text-blue-400 hover:text-blue-300"
+              className="transition-colors font-medium text-mango-green hover:text-mango-primary"
             >
               Return to Home
             </Link>
@@ -237,7 +237,7 @@ export default function ReviewsPage() {
                         <div 
                           className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                           style={{
-                            background: 'linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%)'
+                            background: 'linear-gradient(135deg, #2F6B55 0%, #1E4D3D 100%)'
                           }}
                         >
                           <span className="text-white font-semibold text-base">
@@ -278,7 +278,7 @@ export default function ReviewsPage() {
                     {shouldTruncate && (
                       <button
                         onClick={() => toggleReview(index)}
-                        className="mt-2 text-sm font-medium transition-colors text-blue-400 hover:text-blue-300"
+                        className="mt-2 text-sm font-medium transition-colors text-mango-green hover:text-mango-primary"
                       >
                         {isExpanded ? 'Read less' : 'Read more'}
                       </button>
@@ -300,7 +300,7 @@ export default function ReviewsPage() {
                   onClick={() => setDisplayCount(reviewsData.reviews.length)}
                   className="w-full text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)'
+                    background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)'
                   }}
                 >
                   View More ({reviewsData.reviews.length - displayCount} more)
@@ -308,7 +308,7 @@ export default function ReviewsPage() {
               </motion.div>
             )}
 
-            {/* View All Reviews on Google Button - Blue Solid Color */}
+            {/* View All Reviews on Google Button */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -320,7 +320,7 @@ export default function ReviewsPage() {
                 rel="noopener noreferrer"
                 className="block w-full text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                 style={{
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)'
+                  background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)'
                 }}
               >
                 View All Reviews on Google

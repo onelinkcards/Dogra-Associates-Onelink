@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Download, MapPin, ShoppingCart, Share2, Star, X, Instagram } from 'lucide-react'
+import { Phone, Download, MapPin, ShoppingCart, Star, X, Instagram, UtensilsCrossed } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -117,9 +117,8 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
   return (
     <>
       <div className="space-y-3" onClick={(e) => e.stopPropagation()}>
-        {/* Top Row: Call Now, Payment */}
+        {/* Row 1: Call Now (bluish, rounded, clean border), Payment (as before) */}
         <div className="flex gap-2 items-stretch">
-          {/* Call Now - Enhanced Premium Design */}
           <Button
             data-call-button
             onClick={(e) => {
@@ -127,8 +126,8 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
               setCallSelectorOpen(!callSelectorOpen)
               setWhatsappSelectorOpen(false)
             }}
-            className="flex-1 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group"
-            style={{ 
+            className="flex-1 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group border-2 border-blue-400/30"
+            style={{
               background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%)',
               boxShadow: '0 8px 20px rgba(37, 99, 235, 0.4), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
               WebkitTapHighlightColor: 'transparent',
@@ -145,23 +144,13 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
               e.currentTarget.style.background = 'linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%)'
             }}
           >
-            {/* Shine effect overlay */}
-            <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{
-                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-                transform: 'translateX(-100%)',
-                animation: 'shine-sweep 2s infinite'
-            }}
-            />
             <Phone className="w-4 h-4 relative z-10" style={{ filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))' }} />
-            <span className="text-sm primary-btn-text relative z-10 font-bold" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)' }}>{t('callNow')}</span>
+            <span className="text-sm font-bold relative z-10" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)' }}>{t('callNow')}</span>
           </Button>
 
-          {/* Payment Button with Enhanced Premium Design */}
           {onOpenPayments && (
             <div className="flex-1 relative">
-              <span 
+              <span
                 className="absolute -top-1.5 left-1/2 transform -translate-x-1/2 text-white text-[8px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap z-20 animate-pulse"
                 style={{
                   background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
@@ -176,7 +165,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                   onOpenPayments()
                 }}
                 className="w-full h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group"
-                style={{ 
+                style={{
                   background: 'radial-gradient(circle at 30% 30%, rgb(21, 124, 130) 0%, rgb(15, 118, 110) 40%, rgb(17, 19, 21) 100%)',
                   boxShadow: '0 8px 20px rgba(21, 124, 130, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
                   WebkitTapHighlightColor: 'transparent',
@@ -193,15 +182,6 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                   e.currentTarget.style.background = 'radial-gradient(circle at 30% 30%, rgb(21, 124, 130) 0%, rgb(15, 118, 110) 40%, rgb(17, 19, 21) 100%)'
                 }}
               >
-                {/* Shine effect overlay */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
-                    transform: 'translateX(-100%)',
-                    animation: 'shine-sweep 2s infinite'
-                  }}
-                />
                 <Image
                   src="/icons8-bhim-48.png"
                   alt="Payment"
@@ -210,22 +190,19 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                   className="w-4 h-4 object-contain relative z-10"
                   style={{ filter: 'brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))' }}
                 />
-                <span className="text-sm primary-btn-text relative z-10 font-bold" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)' }}>{t('openPayment')}</span>
+                <span className="text-sm font-bold relative z-10" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)' }}>{t('openPayment')}</span>
               </Button>
             </div>
           )}
         </div>
 
-        {/* Second Row: Menu/Order and Location */}
+        {/* Row 2: Menu, Location - as before (white bg, shadows) */}
         <div className="grid grid-cols-2 gap-2">
-          {/* Menu/Shopping Cart Button */}
           <Link
-            href="https://honeymoneyfish.co/order-online/menu"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/menu"
             onClick={(e) => e.stopPropagation()}
             className="h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
-            style={{ 
+            style={{
               color: '#0F172A',
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               borderRadius: '16px',
@@ -243,14 +220,12 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
             }}
           >
             <ShoppingCart className="w-4 h-4" style={{ color: '#475569', filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))' }} />
-            <span className="text-sm font-bold" style={{ color: '#0F172A', fontSize: '14px' }}>Menu/Order</span>
+            <span className="text-sm font-bold" style={{ color: '#0F172A', fontSize: '14px' }}>View Menu</span>
           </Link>
-          
-          {/* Location Button */}
           <Button
             onClick={handleDirections}
             className="h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
-            style={{ 
+            style={{
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               borderRadius: '16px',
               fontSize: '14px',
@@ -271,14 +246,32 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
           </Button>
         </div>
 
-        {/* Third Row: Reviews and Share */}
+        {/* Row 3: Zomato (cranberry red), Reviews (as before - white bg, yellow tint shadow) */}
         <div className="grid grid-cols-2 gap-2">
-          {/* Review Button */}
+          {shopConfig.social?.zomato && (
+            <Link
+              href={shopConfig.social.zomato}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="h-11 rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation font-semibold text-white hover:opacity-95"
+              style={{
+                background: '#9E1030',
+                boxShadow: '0 4px 12px rgba(158, 16, 48, 0.4), 0 2px 6px rgba(0, 0, 0, 0.1)',
+                borderRadius: '16px',
+                fontSize: '14px',
+                WebkitTapHighlightColor: 'transparent'
+              }}
+            >
+              <UtensilsCrossed className="w-4 h-4 text-white" />
+              <span className="text-sm font-bold">Zomato</span>
+            </Link>
+          )}
           <Link
             href="/reviews"
             onClick={(e) => e.stopPropagation()}
             className="h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
-            style={{ 
+            style={{
               color: '#0F172A',
               boxShadow: '0 8px 16px rgba(234, 179, 8, 0.25), 0 4px 8px rgba(234, 179, 8, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               borderRadius: '16px',
@@ -298,34 +291,6 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
             <Star className="w-4 h-4" style={{ color: '#EAB308' }} fill="#EAB308" />
             <span className="text-sm font-bold" style={{ color: '#0F172A', fontSize: '14px' }}>Reviews</span>
           </Link>
-
-          {/* Share Button */}
-          <Button
-            onClick={(e) => {
-              e.stopPropagation()
-              handleShare()
-            }}
-            className="h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
-            style={{ 
-              color: '#0F172A',
-              boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-              borderRadius: '16px',
-              fontSize: '14px',
-              WebkitTapHighlightColor: 'transparent',
-              transform: 'translateY(-1px)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
-              e.currentTarget.style.transform = 'translateY(-2px)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
-              e.currentTarget.style.transform = 'translateY(-1px)'
-            }}
-          >
-            <Share2 className="w-4 h-4" style={{ color: '#3B82F6' }} />
-            <span className="text-sm font-bold" style={{ color: '#0F172A', fontSize: '14px' }}>Share</span>
-          </Button>
         </div>
 
         {/* Bottom Row: Save Contact & Gallery */}
@@ -381,7 +346,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                 style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
               >
                 <img
-                  src="/gallery/WhatsApp Image 2025-12-13 at 17.08.07.jpeg"
+                  src="/gallery/unnamed.webp"
                   alt="Gallery"
                   className="w-full h-full object-cover"
                   loading="eager"
@@ -391,7 +356,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                 style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
               >
                 <img
-                  src="/gallery/WhatsApp Image 2025-12-13 at 17.08.12.jpeg"
+                  src="/gallery/unnamed (1).webp"
                   alt="Gallery"
                   className="w-full h-full object-cover"
                   loading="eager"
@@ -442,7 +407,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                       className="flex flex-col items-center gap-2 touch-manipulation"
                       style={{ WebkitTapHighlightColor: 'transparent' }}
                     >
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+                      <div className="w-16 h-16 bg-gradient-to-br from-mango-green to-mango-greenSoft rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform">
                         <Phone className="w-7 h-7 text-white" />
                       </div>
                       <span className="text-xs font-semibold text-slate-800 text-center">{person.label}</span>
@@ -526,7 +491,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between mb-6">
-                  <div className="text-base font-bold text-slate-800">Select Instagram Account</div>
+                  <div className="text-base font-bold text-slate-800">Follow us on Instagram</div>
                   <button
                     onClick={() => setInstagramSelectorOpen(false)}
                     className="p-2 rounded-full hover:bg-slate-100 transition-colors"
@@ -536,7 +501,6 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                   </button>
                 </div>
                 <div className="flex gap-6 justify-center flex-wrap">
-                  {/* Frozen Nation Instagram */}
                   {shopConfig.social?.instagram && (
                     <motion.button
                       initial={{ scale: 0, opacity: 0 }}
@@ -565,43 +529,8 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments 
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-sm font-bold text-slate-800 mb-1">Frozen Nation</div>
-                        <div className="text-xs text-slate-600">@frozennation.in</div>
-                      </div>
-                    </motion.button>
-                  )}
-                  
-                  {/* Honey Money Fish Jammu Instagram */}
-                  {shopConfig.social?.instagramJammu && (
-                    <motion.button
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                      onClick={() => {
-                        window.open(shopConfig.social.instagramJammu, '_blank', 'noopener,noreferrer')
-                        setInstagramSelectorOpen(false)
-                      }}
-                      className="flex flex-col items-center gap-3 touch-manipulation"
-                      style={{ WebkitTapHighlightColor: 'transparent' }}
-                    >
-                      <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform overflow-hidden p-1"
-                        style={{
-                          background: 'linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045)',
-                        }}
-                      >
-                        <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                          <Image
-                            src="/social.png"
-                            alt="Instagram"
-                            width={72}
-                            height={72}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-sm font-bold text-slate-800 mb-1">Honey Money Fish</div>
-                        <div className="text-xs text-slate-600">@honeymoneyfish_jammu</div>
+                        <div className="text-sm font-bold text-slate-800 mb-1">Follow @mangojammu</div>
+                        <div className="text-xs text-slate-600">@mangojammu</div>
                       </div>
                     </motion.button>
                   )}

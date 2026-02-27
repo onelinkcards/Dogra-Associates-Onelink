@@ -93,6 +93,14 @@ const config: Config = {
           black: '#1A1A1A',
           green: '#228B22',
         },
+        mango: {
+          primary: '#F4A300',
+          primarySoft: '#FFB938',
+          green: '#1E4D3D',
+          greenSoft: '#2F6B55',
+          lightGreen: '#E8F3EE',
+          textDark: '#1A1A1A',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

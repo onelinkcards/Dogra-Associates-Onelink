@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/logo-fish.png`,
+        url: `${siteConfig.url}/Frame 2147226119.png`,
         width: 1200,
         height: 630,
-        alt: 'Smart Digital Business Card - Honey\'s Fresh N Frozen',
+        alt: 'MANGO - Pure Vegetarian • Budget Friendly • Bahu Plaza, Jammu',
         type: 'image/png',
       },
     ],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Smart Digital Business Card',
     description: 'One smart link for Call, WhatsApp, Location, Reviews, Menu and Payments.',
-    images: [`${siteConfig.url}/logo-fish.png`],
+    images: [`${siteConfig.url}/Frame 2147226119.png`],
   },
   robots: {
     index: true,

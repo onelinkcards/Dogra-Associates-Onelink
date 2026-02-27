@@ -34,16 +34,15 @@ export default function LoadingScreen() {
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
             className="w-40 h-40 bg-white rounded-xl shadow-2xl flex items-center justify-center overflow-hidden border-2 border-slate-200 relative"
           >
-            {/* Logo in Center */}
-            <div className="w-36 h-36 rounded-full bg-white flex items-center justify-center shadow-xl overflow-hidden">
+            {/* Logo in Center - MANGO logo with contain to show full design */}
+            <div className="w-36 h-36 rounded-xl flex items-center justify-center shadow-xl overflow-hidden bg-mango-green p-1">
               <Image
                 src={shopConfig.assets.logo}
-                alt={`${siteConfig.name} Logo`}
+                alt={`${shopConfig.name} Logo`}
                 width={144}
                 height={144}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 priority
-                style={{ transform: 'scale(1.2)' }}
               />
             </div>
 

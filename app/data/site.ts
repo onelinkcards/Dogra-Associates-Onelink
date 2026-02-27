@@ -9,16 +9,16 @@ export interface ContactPerson {
 }
 
 export const siteConfig = {
-  name: "Honey's Fresh N Frozen",
-  tagline: "Fresh • Frozen • Hygienic • Trusted Since 1968",
-  url: "https://honeysfreshnfrozen.vercel.app",
+  name: "Mango",
+  tagline: "Pure Vegetarian • Bahu Plaza, Jammu",
+  url: "https://honeymoneyfish.co",
   
   contact: {
     phones: ["9419141495", "9419110195"],
     email: "honeyfish.jmu@gmail.com",
-    address: "Fish Market, Vivekanand Chowk, Jammu, Jammu & Kashmir - 180001",
-    mapQuery: "Honey's Fresh N Frozen, Fish Market, Vivekanand Chowk, Jammu",
-    storeHours: "Monday - Sunday: 07:00 AM to 06:30 PM",
+    address: "Shop No 32, B2 South Block, Bahu Plaza, Gandhi Nagar, Jammu, Jammu & Kashmir – 180004",
+    mapQuery: "Mango Bahu Plaza Jammu Gandhi Nagar",
+    storeHours: "Monday – Saturday: 10:30 AM – 9:30 PM. Sunday: 11:00 AM – 9:30 PM.",
     officePhone: "9419108405",
   },
   
@@ -46,13 +46,13 @@ export const siteConfig = {
   
   whatsapp: {
     defaultPhone: "9419141495",
-    defaultMessage: "Hello Honey's Fresh N Frozen, I want to place an order. Please share today's availability and rates.",
+    defaultMessage: "Hi Mango, I would like to place an order. Please share today's availability and rates.",
   },
   
   trustBadges: [
-    "58+ Years in Business",
-    "4.7★ Rated on Justdial",
-    "Boneless Fish Pioneers in J&K"
+    "Pure Vegetarian",
+    "4.1★ Google Rating",
+    "Dine-In & Takeaway"
   ] as string[],
   
   brands: [
@@ -79,19 +79,9 @@ export const siteConfig = {
   ],
   
   about: {
-    title: "Welcome to Honey's Fresh N Frozen",
-    shortDescription: "Established in 1968, Honey's Fresh N Frozen is a trusted family-run business in Jammu offering fresh and frozen fish, chicken, and mutton. Known for hygiene, quality, and innovation, we pioneered boneless fish in the region and continue to serve with the same dedication and care.",
-    fullDescription: `Our journey began in 1968 with Sh. Ashok Kumar Mahajan, a visionary entrepreneur who transformed the food culture of Jammu & Kashmir. At a time when many people avoided eating fish due to bones, he introduced boneless fish to the local market — making fish easier, safer, and more enjoyable to eat. This innovation laid the foundation of our business.
-
-In 1986, Sh. Ashok expanded into wholesale fish supply, building a strong reputation for quality, hygiene, and trust. His sons, Honey and Money, joined the business and carried forward his passion for nutritious food and clean processing.
-
-By 2005, we expanded into poultry products and processing, and in 2015, we added mutton products, offering customers a complete range of high-quality non-vegetarian foods.
-
-In 2021, during the second COVID wave, we lost our beloved parents Sh. Ashok Kumar Mahajan and Smt. Rama Mahajan. Their values, discipline, and dedication continue to guide us every day.
-
-Our website HoneyMoneyFish.co is a tribute to them.
-
-Today, we proudly serve fresh and frozen fish, chicken, and mutton, ensuring top hygiene, fair pricing, and doorstep delivery in Jammu.`,
+    title: "Welcome to Mango",
+    shortDescription: "Located in the heart of Bahu Plaza, Mango is a pure vegetarian restaurant serving authentic North Indian and Chinese flavours. We focus on clean preparation, quality ingredients, and a welcoming dining experience for families and friends.",
+    fullDescription: "Located in the heart of Bahu Plaza, Mango is a pure vegetarian restaurant serving authentic North Indian and Chinese flavours. We focus on clean preparation, quality ingredients, and a welcoming dining experience for families and friends.",
   },
   
   catalog: [
@@ -133,15 +123,15 @@ Today, we proudly serve fresh and frozen fish, chicken, and mutton, ensuring top
   
   social: {
     facebook: "https://www.facebook.com/share/198avg1doq/",
-    instagram: "https://www.instagram.com/frozennation.in?igsh=MXF0YmVvenQxY2FkNg==",
+    instagram: "https://www.instagram.com/mangojammu/?hl=en",
     twitter: "https://twitter.com/yourbusiness",
     linkedin: "https://www.linkedin.com/company/yourbusiness",
   },
   
   seo: {
-    title: "Honey's Fresh N Frozen - Fresh Fish, Chicken & Mutton | Jammu",
-    description: "Honey's Fresh N Frozen - Trusted since 1968. Fresh and frozen fish, chicken, mutton, and ready-to-eat products in Jammu. Premium quality, hygienic processing, doorstep delivery. Order now!",
-    keywords: "fresh fish jammu, frozen fish jammu, chicken jammu, mutton jammu, fish market jammu, honey fresh frozen, boneless fish jammu, fish delivery jammu",
+    title: "Mango - Pure Vegetarian Restaurant | Bahu Plaza Jammu",
+    description: "Mango Bahu Plaza Jammu - Pure vegetarian restaurant. North Indian & Chinese cuisine, dine-in & takeaway. Authentic taste, quality ingredients.",
+    keywords: "Mango Jammu, vegetarian restaurant Bahu Plaza, North Indian Jammu, Chinese food Jammu, pure veg restaurant Jammu",
   },
   
   credits: {
@@ -151,8 +141,8 @@ Today, we proudly serve fresh and frozen fish, chicken, and mutton, ensuring top
   
   google: {
     placeId: "ChIJa7Yhg4-EHjkRrZWiBBo2YRo",
-    mapsUrl: "https://www.google.com/maps/place/Honey+Money+Fish+Company+jammu/@32.7262694,74.8593598,17z",
-    reviewsUrl: "https://www.google.com/maps/place/Honey+Money+Fish+Company+jammu/@32.7262694,74.8593598,17z/review",
+    mapsUrl: "https://www.google.com/maps/search/Mango+Bahu+Plaza+Jammu+Gandhi+Nagar",
+    reviewsUrl: "https://www.google.com/maps/search/Mango+Bahu+Plaza+Jammu+Gandhi+Nagar",
   },
 }
 
