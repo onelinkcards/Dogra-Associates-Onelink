@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -34,7 +34,7 @@ const MENU_PDF_URL = '/mango%20menu%2017-01-2025.pdf'
 
 const defaultOrderMessage = "Hi Mango, I'd like to order from the menu. Please share today's availability and rates."
 
-export default function MenuPage() {
+function MenuPageInner() {
   const searchParams = useSearchParams()
   const catParam = searchParams.get('cat') as MenuCategoryKey | null
   const initialCat = (catParam && categoryKeys.includes(catParam)) ? catParam : 'burgerPizza'
@@ -212,5 +212,22 @@ export default function MenuPage() {
         </div>
       </main>
     </>
+  )
+}
+
+export default function MenuPage() {
+  return (
+    <Suspense
+      fallback={
+        <main
+          className="min-h-screen pb-24 flex items-center justify-center"
+          style={{ backgroundColor: '#1a1a1a' }}
+        >
+          <p className="text-white/70 text-sm">Loading menu…</p>
+        </main>
+      }
+    >
+      <MenuPageInner />
+    </Suspense>
   )
 }

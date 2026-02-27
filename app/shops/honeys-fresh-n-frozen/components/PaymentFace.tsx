@@ -680,7 +680,7 @@ export default function PaymentFace({
                 </p>
               </div>
 
-              {/* Share QR (WhatsApp, etc.) – primary action */}
+              {/* Share QR – primary action */}
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
@@ -700,20 +700,8 @@ export default function PaymentFace({
                 aria-label="Share QR Code"
               >
                 <Share2 className="w-4 h-4" style={{ color: '#1FB6D9' }} />
-                <span className="text-sm">Share QR (WhatsApp, etc.)</span>
+                <span className="text-sm">Share QR</span>
               </motion.button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleDownloadQR()
-                }}
-                className="text-white/70 hover:text-white text-xs underline mb-2 block w-full text-center"
-                aria-label="Download QR Code"
-              >
-                Download QR
-              </button>
 
               {/* Close Button */}
               <motion.button
