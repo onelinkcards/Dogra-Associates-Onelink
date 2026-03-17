@@ -661,22 +661,6 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Block 4: Consultation Available – icon in square */}
-                <div className="flex items-start gap-3 w-full mb-3 rounded-2xl p-3 sm:p-4 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/20 border border-white/30 shadow-md">
-                    <Calendar className="w-5 h-5 text-white drop-shadow-md" />
-                  </div>
-                  <div className="min-w-0 flex-1 text-left">
-                    <p className="text-sm font-bold leading-snug text-white/95">Consultation Available</p>
-                    <p className="text-xs sm:text-sm leading-relaxed text-white/90">
-                      Book a consultation via WhatsApp or call our office.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Small heading above map */}
-                <p className="text-sm font-bold leading-snug text-white/95 w-full mb-2">Visit Our Office</p>
-
                 {/* Google Map – glass style */}
                 <div className="w-full h-28 sm:h-32 rounded-2xl overflow-hidden mb-4 pointer-events-none flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
                   <iframe
@@ -712,28 +696,6 @@ export default function Hero() {
                     <MapPin className="w-5 h-5 flex-shrink-0 text-white" />
                     Get Directions
                   </motion.a>
-
-                  {/* Small CTA below map */}
-                  <div className="w-full flex flex-col items-center mt-3">
-                    <p className="text-xs sm:text-sm font-semibold text-white/90 text-center mb-2">
-                      Need help with tax or compliance?
-                    </p>
-                    <motion.button
-                      type="button"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        handleOpenAppointment()
-                      }}
-                      className="inline-flex items-center justify-center gap-2 bg-white/25 hover:bg-white/35 active:bg-white/40 text-white font-semibold px-6 py-3.5 rounded-full border border-white/30 backdrop-blur-sm touch-manipulation pointer-events-auto shadow-[0_10px_25px_rgba(0,0,0,0.3)] min-h-[48px] min-w-[180px]"
-                      style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}
-                    >
-                      <Calendar className="w-5 h-5 flex-shrink-0 text-white" />
-                      Book Consultation
-                    </motion.button>
-                  </div>
                 </div>
               </motion.div>
             </div>
