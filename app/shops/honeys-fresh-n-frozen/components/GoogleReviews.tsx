@@ -72,9 +72,9 @@ export default function GoogleReviews() {
   // Show skeleton loader
   if (loading) {
     return (
-      <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
-        <div className="flex items-center justify-between mb-5 px-2">
-          <h2 className="text-2xl font-bold text-white tracking-tight">
+      <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
+        <div className="mb-5">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-white">
             Google Reviews
           </h2>
         </div>
@@ -82,8 +82,8 @@ export default function GoogleReviews() {
           {[1, 2].map((i) => (
             <div
               key={i}
-              className="rounded-2xl bg-white/5 p-4 animate-pulse"
-              style={{ height: '120px' }}
+              className="rounded-2xl p-4 animate-pulse border"
+              style={{ height: '120px', background: '#FFFFFF', borderColor: '#E5ECF6' }}
             />
           ))}
         </div>
@@ -94,26 +94,28 @@ export default function GoogleReviews() {
   // Show error state with message
   if (error || (!reviewsData && !loading)) {
     return (
-      <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
-        <div className="flex items-center justify-between mb-5 px-2">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+      <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
             Google Reviews
           </h2>
           <Link
             href="/reviews"
-            className="text-sm font-semibold text-white hover:text-white/90 transition-colors flex items-center gap-1"
+            className="text-sm font-semibold transition-colors flex items-center gap-1"
+            style={{ color: '#3A7BD5' }}
           >
             View All
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-6 text-center">
-          <p className="text-slate-300 mb-4">
+        <div className="rounded-2xl p-6 text-center border" style={{ background: '#FFFFFF', borderColor: '#E5ECF6', boxShadow: '0 8px 20px rgba(15,42,68,0.06)' }}>
+          <p className="mb-4" style={{ color: '#6B7A90' }}>
             {error || 'Unable to load reviews at the moment.'}
           </p>
           <Link
             href="/reviews"
-            className="inline-block bg-mango-green hover:bg-mango-greenSoft text-white font-semibold py-2 px-4 rounded-xl transition-all"
+            className="inline-block font-semibold py-2 px-4 rounded-xl transition-all text-white"
+            style={{ background: '#0F2A44' }}
           >
             View Reviews Page
           </Link>
@@ -127,14 +129,14 @@ export default function GoogleReviews() {
   const displayReviews = reviewsData.reviews.slice(0, 2)
 
   return (
-    <section id="reviews" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
-      <div className="flex items-center justify-between mb-5 px-2">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+    <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
           Google Reviews
         </h2>
         <Link
           href="/reviews"
-          className="text-sm font-semibold text-white hover:text-white/90 transition-colors flex items-center gap-1"
+          className="text-sm font-semibold text-white/90 hover:text-white transition-colors flex items-center gap-1"
         >
           View All
           <ChevronRight className="w-4 h-4" />
@@ -147,7 +149,7 @@ export default function GoogleReviews() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="mb-5 px-2"
+        className="mb-5"
       >
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center gap-1">
@@ -162,11 +164,11 @@ export default function GoogleReviews() {
               />
             ))}
           </div>
-          <span className="text-white font-bold text-lg">
+          <span className="font-bold text-lg" style={{ color: '#0F2A44' }}>
             {reviewsData.rating.toFixed(1)}
           </span>
         </div>
-        <p className="text-slate-300 text-sm">
+        <p className="text-sm" style={{ color: '#6B7A90' }}>
           Based on {reviewsData.totalReviews.toLocaleString()} reviews on Google
         </p>
       </motion.div>
@@ -180,13 +182,12 @@ export default function GoogleReviews() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.05, duration: 0.3, ease: 'easeOut' }}
-            className="rounded-2xl p-4 hover:shadow-lg transition-all"
+            className="rounded-2xl p-4 transition-all"
             style={{
-              background: 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05)'
+              background: '#FFFFFF',
+              border: '1px solid #E5ECF6',
+              borderRadius: 16,
+              boxShadow: '0 8px 20px rgba(15,42,68,0.06)',
             }}
           >
             <div className="flex items-start gap-3 mb-2">
@@ -202,18 +203,16 @@ export default function GoogleReviews() {
               ) : (
                 <div 
                   className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{
-                    background: 'linear-gradient(135deg, #2F6B55 0%, #1E4D3D 100%)'
-                  }}
+                  style={{ background: '#EAF3FF', color: '#3A7BD5' }}
                 >
-                  <span className="text-white font-semibold text-sm">
+                  <span className="font-semibold text-sm" style={{ color: '#2C5282' }}>
                     {review.author_name.charAt(0).toUpperCase()}
                   </span>
                 </div>
               )}
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <h3 className="font-semibold text-sm text-white drop-shadow-md">
+                  <h3 className="font-semibold text-sm" style={{ color: '#0F2A44' }}>
                     {review.author_name}
                   </h3>
                   <div className="flex items-center gap-0.5">
@@ -229,12 +228,12 @@ export default function GoogleReviews() {
                     ))}
                   </div>
                 </div>
-                <p className="text-xs text-white/80 drop-shadow-sm">
+                <p className="text-xs" style={{ color: '#6B7A90' }}>
                   {review.relative_time_description}
                 </p>
               </div>
             </div>
-            <p className="text-sm leading-relaxed line-clamp-3 text-white/90 drop-shadow-sm">
+            <p className="text-sm leading-relaxed line-clamp-3" style={{ color: '#0B1F33' }}>
               {review.text}
             </p>
           </motion.div>
@@ -251,26 +250,21 @@ export default function GoogleReviews() {
       >
         <Link
           href="/reviews"
-          className="block w-full font-semibold py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+          className="block w-full font-semibold py-3 px-4 rounded-2xl transition-all flex items-center justify-center gap-2"
           style={{
-            background: 'rgba(255, 255, 255, 0.15)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            color: 'white',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05)'
+            background: '#FFFFFF',
+            color: '#0F2A44',
+            border: '1px solid #E5ECF6',
+            boxShadow: '0 8px 20px rgba(15,42,68,0.06)',
           }}
         >
           View All Reviews
-          <ArrowRight className="w-4 h-4 text-white" />
+          <ArrowRight className="w-4 h-4" style={{ color: '#3A7BD5' }} />
         </Link>
         <Link
           href="/reviews#write-review"
-          className="block w-full font-semibold py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-          style={{
-            background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)',
-            color: 'white'
-          }}
+          className="block w-full font-semibold py-3 px-4 rounded-2xl transition-all flex items-center justify-center gap-2 text-white"
+          style={{ background: '#0F2A44', boxShadow: '0 8px 20px rgba(15,42,68,0.15)' }}
         >
           Write a Review
           <Star className="w-4 h-4 fill-white text-white" />

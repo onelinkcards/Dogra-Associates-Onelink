@@ -1,148 +1,78 @@
-// Contact Person Type
-export type ContactPersonLabel = "Honey" | "Money" | "Office"
+// Site config for Footer and shared refs (per ONELINK_DESIGN_GUIDE Section 9)
+
+export type ContactPersonLabel = "Ramit Khurana" | "Office"
 
 export interface ContactPerson {
   label: ContactPersonLabel
-  phoneE164: string // Full number with country code: 919419141495
-  phoneDisplay: string // Formatted for display: 94191 41495
-  whatsappE164: string // Same as phoneE164 for WhatsApp
+  phoneE164: string
+  phoneDisplay: string
+  whatsappE164: string
 }
 
 export const siteConfig = {
-  name: "Mango",
-  tagline: "Pure Vegetarian • Bahu Plaza, Jammu",
+  name: "Dogra Associates",
+  tagline: "Ramit Khurana – Chartered Accountant",
   url: "https://honeymoneyfish.co",
-  
+
   contact: {
-    phones: ["9419141495", "9419110195"],
-    email: "honeyfish.jmu@gmail.com",
-    address: "Shop No 32, B2 South Block, Bahu Plaza, Gandhi Nagar, Jammu, Jammu & Kashmir – 180004",
-    mapQuery: "Mango Bahu Plaza Jammu Gandhi Nagar",
-    storeHours: "Monday – Saturday: 10:30 AM – 9:30 PM. Sunday: 11:00 AM – 9:30 PM.",
-    officePhone: "9419108405",
+    phones: ["9086038829", "9419238829"],
+    email: "ramitkhurana@gmail.com",
+    address: "Dogra Associates, Jammu",
+    mapQuery: "32.746583,74.847111",
+    storeHours: "By appointment",
+    officePhone: "9419238829",
   },
-  
-  // Contact persons for multi-contact flow
+
   contactPersons: [
-    {
-      label: "Honey" as ContactPersonLabel,
-      phoneE164: "919419141495",
-      phoneDisplay: "94191 41495",
-      whatsappE164: "919419141495",
-    },
-    {
-      label: "Money" as ContactPersonLabel,
-      phoneE164: "919419110195",
-      phoneDisplay: "94191 10195",
-      whatsappE164: "919419110195",
-    },
-    {
-      label: "Office" as ContactPersonLabel,
-      phoneE164: "919419108405",
-      phoneDisplay: "94191 08405",
-      whatsappE164: "919419108405",
-    },
+    { label: "Ramit Khurana" as ContactPersonLabel, phoneE164: "919086038829", phoneDisplay: "90860 38829", whatsappE164: "919086038829" },
+    { label: "Office" as ContactPersonLabel, phoneE164: "919419238829", phoneDisplay: "94192 38829", whatsappE164: "919419238829" },
   ] as ContactPerson[],
-  
+
   whatsapp: {
-    defaultPhone: "9419141495",
-    defaultMessage: "Hi Mango, I would like to place an order. Please share today's availability and rates.",
+    defaultPhone: "9086038829",
+    defaultMessage: "Hello Sir, I need consultation regarding tax services.",
   },
-  
-  trustBadges: [
-    "Pure Vegetarian",
-    "4.1★ Google Rating",
-    "Dine-In & Takeaway"
-  ] as string[],
-  
+
+  trustBadges: ["ICAI Registered", "20+ Years Experience", "Tax & GST Expert"] as string[],
+
   brands: [
-    {
-      name: "Fresh & Frozen",
-      tagline: "Premium Quality",
-      logo: "",
-    },
-    {
-      name: "Hygienic Processing",
-      tagline: "Top Standards",
-      logo: "",
-    },
-    {
-      name: "Doorstep Delivery",
-      tagline: "Jammu Wide",
-      logo: "",
-    },
-    {
-      name: "Family Legacy",
-      tagline: "Since 1968",
-      logo: "",
-    },
+    { name: "Tax Advisory", tagline: "", logo: "" },
+    { name: "GST & Compliance", tagline: "", logo: "" },
+    { name: "Financial Services", tagline: "", logo: "" },
+    { name: "Audit & Assurance", tagline: "", logo: "" },
   ],
-  
+
   about: {
-    title: "Welcome to Mango",
-    shortDescription: "Located in the heart of Bahu Plaza, Mango is a pure vegetarian restaurant serving authentic North Indian and Chinese flavours. We focus on clean preparation, quality ingredients, and a welcoming dining experience for families and friends.",
-    fullDescription: "Located in the heart of Bahu Plaza, Mango is a pure vegetarian restaurant serving authentic North Indian and Chinese flavours. We focus on clean preparation, quality ingredients, and a welcoming dining experience for families and friends.",
+    title: "Welcome to Dogra Associates",
+    shortDescription: "Dogra Associates is a professional Chartered Accountancy firm led by Ramit Khurana, Managing Partner with over 20 years of experience. We offer tax advisory, GST compliance, audit, and financial consulting services for individuals and businesses.",
+    fullDescription: "Dogra Associates is a professional Chartered Accountancy firm led by Ramit Khurana, Managing Partner with over 20 years of experience. We offer tax advisory, GST compliance, audit, and financial consulting services for individuals and businesses.",
   },
-  
-  catalog: [
-    {
-      id: "service-1",
-      title: "Service/Product 1",
-      description: "Brief description of your first service or product.",
-      logo: "",
-      details: "This is a demo description for your first service or product. Replace this with detailed information about what you offer. Explain the benefits, features, and why customers should choose you. Add specific details that make your service unique and valuable.",
-      images: [], // Add your product/service images here
-    },
-    {
-      id: "service-2",
-      title: "Service/Product 2",
-      description: "Brief description of your second service or product.",
-      logo: "",
-      details: "This is a demo description for your second service or product. Replace this with detailed information about what you offer. Explain the benefits, features, and why customers should choose you. Add specific details that make your service unique and valuable.",
-      images: [], // Add your product/service images here
-    },
-    {
-      id: "service-3",
-      title: "Service/Product 3",
-      description: "Brief description of your third service or product.",
-      logo: "",
-      details: "This is a demo description for your third service or product. Replace this with detailed information about what you offer. Explain the benefits, features, and why customers should choose you. Add specific details that make your service unique and valuable.",
-      images: [], // Add your product/service images here
-    },
-    {
-      id: "service-4",
-      title: "Service/Product 4",
-      description: "Brief description of your fourth service or product.",
-      logo: "",
-      details: "This is a demo description for your fourth service or product. Replace this with detailed information about what you offer. Explain the benefits, features, and why customers should choose you. Add specific details that make your service unique and valuable.",
-      images: [], // Add your product/service images here
-    },
-  ],
-  
+
+  catalog: [] as Array<{ id: string; title: string; description: string; logo: string; details: string; images: string[] }>,
   brochures: [] as Array<{ href: string; title: string }>,
-  
+
   social: {
     facebook: "https://www.facebook.com/share/198avg1doq/",
     instagram: "https://www.instagram.com/mangojammu/?hl=en",
-    twitter: "https://twitter.com/yourbusiness",
-    linkedin: "https://www.linkedin.com/company/yourbusiness",
+    twitter: "",
+    linkedin: "",
   },
-  
+
   seo: {
-    title: "Mango - Pure Vegetarian Restaurant | Bahu Plaza Jammu",
-    description: "Mango Bahu Plaza Jammu - Pure vegetarian restaurant. North Indian & Chinese cuisine, dine-in & takeaway. Authentic taste, quality ingredients.",
-    keywords: "Mango Jammu, vegetarian restaurant Bahu Plaza, North Indian Jammu, Chinese food Jammu, pure veg restaurant Jammu",
+    title: "Dogra Associates | Ramit Khurana – Chartered Accountant",
+    description: "Dogra Associates – Ramit Khurana, Chartered Accountant & Managing Partner. Tax advisory, GST compliance, audit and financial services. 20+ years experience.",
+    keywords: "Dogra Associates, Chartered Accountant Jammu, CA Ramit Khurana, Tax Advisory, GST Compliance, ICAI Registered",
   },
-  
+
   credits: {
     designer: "RepixelX Studio",
     designerUrl: "https://repixelx.com",
   },
-  
+
   google: {
-    placeId: "ChIJa7Yhg4-EHjkRrZWiBBo2YRo",
-    mapsUrl: "https://www.google.com/maps/search/Mango+Bahu+Plaza+Jammu+Gandhi+Nagar",
-    reviewsUrl: "https://www.google.com/maps/search/Mango+Bahu+Plaza+Jammu+Gandhi+Nagar",
+    placeId: "",
+    mapsUrl: "https://maps.app.goo.gl/iSyNMxFKeDX6Tgi1A",
+    reviewsUrl: "https://www.google.com/search?q=Dogra+Associates+Ramit+Khurana+reviews",
   },
 }
 

@@ -7,14 +7,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 
-// Gallery images from public/gallery folder (Mango)
+// Gallery images from public/gallery folder
 const galleryImages = [
-  '/gallery/unnamed.webp',
-  '/gallery/unnamed (1).webp',
-  '/gallery/unnamed (2).webp',
-  '/gallery/unnamed (3).webp',
-  '/gallery/unnamed (4).webp',
-  '/gallery/unnamed (5).webp',
+  '/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.25.jpeg',
+  '/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.31.jpeg',
+  '/gallery/Green%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
+  '/gallery/Blue%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
 ]
 
 const visibleImages = galleryImages.slice(0, 4)
@@ -39,23 +37,23 @@ export default function Gallery() {
   }
 
   return (
-    <section id="gallery" className="w-full max-w-md mx-auto px-2 pt-8 pb-6">
+    <section id="gallery" className="w-full max-w-md mx-auto pt-8 pb-6">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="mb-6 px-1"
+        className="mb-6"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1.5">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 text-white">
           Gallery
         </h2>
-        <p className="text-sm text-slate-300/80 font-normal">
-          Moments at Mango
+        <p className="text-sm font-normal text-white/90">
+          Office moments & client interactions
         </p>
       </motion.div>
 
-      {/* 4 image grid – click any image → open gallery page */}
+      {/* 4 image grid – premium card style */}
       <div className="grid grid-cols-2 gap-3">
         {visibleImages.map((imageSrc, index) => (
           <motion.div
@@ -64,7 +62,13 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{ delay: index * 0.06, duration: 0.3 }}
-            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
+            className="relative aspect-square overflow-hidden cursor-pointer group rounded-[14px]"
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid #E5ECF6',
+              borderRadius: 14,
+              boxShadow: '0 8px 20px rgba(15,42,68,0.06)',
+            }}
             onClick={handleImageClick}
           >
             <Image
@@ -79,7 +83,7 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* View Gallery button – same: opens gallery page */}
+      {/* View Gallery button */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -94,10 +98,16 @@ export default function Gallery() {
               sessionStorage.setItem('fromGallery', 'true')
             }
           }}
-          className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold transition-all"
+          className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-[14px] font-semibold transition-all"
+          style={{
+            background: 'linear-gradient(135deg, rgba(37,99,235,1) 0%, rgba(30,64,175,1) 100%)',
+            border: '1px solid rgba(59,130,246,0.55)',
+            color: '#FFFFFF',
+            boxShadow: '0 12px 26px rgba(37,99,235,0.25), inset 0 1px 0 rgba(255,255,255,0.15)',
+          }}
         >
-          <span className="text-white font-semibold text-sm">View Gallery</span>
-          <ArrowRight className="w-4 h-4 text-white" />
+          <span className="font-semibold text-sm" style={{ color: '#FFFFFF' }}>View Gallery</span>
+          <ArrowRight className="w-4 h-4" style={{ color: '#E0F2FE' }} />
         </Link>
       </motion.div>
     </section>

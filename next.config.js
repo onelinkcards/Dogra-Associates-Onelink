@@ -10,6 +10,14 @@ const nextConfig = {
   },
   webpack: (config) => {
     config.resolve.alias.canvas = false;
+    // Allow importing audio assets (e.g. mp3 click sound) from TS/TSX.
+    config.module.rules.push({
+      test: /\.mp3$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name].[hash][ext]',
+      },
+    })
     return config;
   },
 }

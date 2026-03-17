@@ -165,7 +165,7 @@ export default function ReviewsPage() {
             </p>
             <Link
               href="/"
-              className="transition-colors font-medium text-mango-green hover:text-mango-primary"
+              className="transition-colors font-medium text-slate-600 hover:text-slate-800"
             >
               Return to Home
             </Link>
@@ -237,7 +237,7 @@ export default function ReviewsPage() {
                         <div 
                           className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                           style={{
-                            background: 'linear-gradient(135deg, #2F6B55 0%, #1E4D3D 100%)'
+                            background: 'linear-gradient(135deg, #475569 0%, #334155 100%)'
                           }}
                         >
                           <span className="text-white font-semibold text-base">
@@ -278,7 +278,7 @@ export default function ReviewsPage() {
                     {shouldTruncate && (
                       <button
                         onClick={() => toggleReview(index)}
-                        className="mt-2 text-sm font-medium transition-colors text-mango-green hover:text-mango-primary"
+                        className="mt-2 text-sm font-medium transition-colors text-slate-600 hover:text-slate-800"
                       >
                         {isExpanded ? 'Read less' : 'Read more'}
                       </button>
@@ -300,7 +300,7 @@ export default function ReviewsPage() {
                   onClick={() => setDisplayCount(reviewsData.reviews.length)}
                   className="w-full text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)'
+                    background: 'linear-gradient(135deg, #334155 0%, #475569 100%)'
                   }}
                 >
                   View More ({reviewsData.reviews.length - displayCount} more)
@@ -320,7 +320,7 @@ export default function ReviewsPage() {
                 rel="noopener noreferrer"
                 className="block w-full text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                 style={{
-                  background: 'linear-gradient(135deg, #1E4D3D 0%, #2F6B55 100%)'
+                  background: 'linear-gradient(135deg, #334155 0%, #475569 100%)'
                 }}
               >
                 View All Reviews on Google

@@ -3,28 +3,34 @@
 import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
-type Face = 'front' | 'info' | 'payment'
+type Face = 'front' | 'info' | 'payment' | 'appointment'
 
 interface Card3DProps {
   currentFace: Face
   isFlipping?: boolean
+  /** Duration in seconds – use longer for more rotation (e.g. 0.65 for 180°, ~1.3 for 360°, ~2 for 540°) so flip speed feels same */
+  transitionDuration?: number
   onFaceChange?: (face: Face) => void
   faceFront: ReactNode
   faceInfo: ReactNode
   facePayment: ReactNode
+  faceAppointment?: ReactNode
 }
+
+const FLIP_DURATION_DEFAULT = 0.65
+const FLIP_EASE = [0.22, 1, 0.36, 1] as const
 
 export default function Card3D({
   currentFace,
   isFlipping = false,
+  transitionDuration = FLIP_DURATION_DEFAULT,
   onFaceChange,
   faceFront,
   faceInfo,
   facePayment,
+  faceAppointment,
 }: Card3DProps) {
-
-  // Calculate rotateY based on current face
-  // For double flip: front (0) -> info (180) -> payment (360/0)
+  // front (0) -> info (180) -> payment (360) -> appointment (540)
   const getRotateY = () => {
     switch (currentFace) {
       case 'front':
@@ -32,7 +38,12 @@ export default function Card3D({
       case 'info':
         return 180
       case 'payment':
-        return 360 // Completes full rotation, payment face is at 360deg position
+        return 360
+      case 'appointment':
+        // Keep appointment as a single clean flip from the front face.
+        // (We still render the appointment face at rotateY=540 internally,
+        // but the container rotation is what controls the user-visible spin.)
+        return 180
       default:
         return 0
     }
@@ -40,7 +51,6 @@ export default function Card3D({
 
   return (
     <div className="relative w-full max-w-md mx-auto" style={{ perspective: '1000px', width: '100%' }}>
-      {/* Blocking overlay during flip animation */}
       {isFlipping && (
         <div
           className="absolute inset-0"
@@ -54,12 +64,12 @@ export default function Card3D({
       )}
       <motion.div
         className="relative w-full"
-        style={{ transformStyle: 'preserve-3d' }}
+        style={{ transformStyle: 'preserve-3d', minHeight: 580 }}
         animate={{ rotateY: getRotateY() }}
         transition={{
-          duration: 0.8,
-          ease: [0.4, 0.0, 0.2, 1], // smooth ease-in-out cubic bezier
-          type: "tween"
+          duration: transitionDuration,
+          ease: FLIP_EASE,
+          type: 'tween'
         }}
       >
         {/* FRONT FACE - rotateY 0 */}
@@ -69,8 +79,9 @@ export default function Card3D({
             backfaceVisibility: 'hidden',
             transform: 'rotateY(0deg)',
             willChange: 'transform',
-            opacity: currentFace === 'payment' ? 0 : 1,
-            pointerEvents: currentFace === 'payment' || isFlipping ? 'none' : 'auto',
+            minHeight: 580,
+            opacity: currentFace === 'payment' || currentFace === 'appointment' ? 0 : 1,
+            pointerEvents: currentFace === 'payment' || currentFace === 'appointment' || isFlipping ? 'none' : 'auto',
             userSelect: 'none',
             WebkitUserSelect: 'none',
             zIndex: currentFace === 'front' ? 20 : currentFace === 'info' ? 10 : 1
@@ -96,7 +107,7 @@ export default function Card3D({
           {faceInfo}
         </div>
 
-        {/* PAYMENT FACE - rotateY 360deg (positioned to show when container rotates to 360) */}
+        {/* PAYMENT FACE - rotateY 360deg */}
         <div
           className="absolute inset-0 w-full"
           style={{
@@ -113,12 +124,30 @@ export default function Card3D({
         >
           {facePayment}
         </div>
+
+        {/* APPOINTMENT FACE - rotateY 540deg */}
+        {faceAppointment && (
+          <div
+            className="absolute inset-0 w-full"
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(540deg)',
+              willChange: 'transform',
+              opacity: currentFace === 'appointment' ? 1 : 0,
+              pointerEvents: currentFace === 'appointment' && !isFlipping ? 'auto' : 'none',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              visibility: currentFace === 'appointment' ? 'visible' : 'hidden',
+              zIndex: currentFace === 'appointment' ? 10 : -1
+            }}
+          >
+            {faceAppointment}
+          </div>
+        )}
       </motion.div>
     </div>
   )
 }
 
-// Export setFace function via context or ref
 export type { Face }
 export type { Card3DProps }
-

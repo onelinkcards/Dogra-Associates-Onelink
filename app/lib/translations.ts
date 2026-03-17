@@ -10,7 +10,12 @@ export const translations = {
     getDirections: 'Get Directions',
     saveContact: 'Save Contact',
     openPayment: 'Payment',
-    
+    bookAppointment: 'Book Now',
+    emailUs: 'Email Us',
+    officeLocation: 'Location',
+    taxTools: 'Tax Tools',
+    ourServices: 'Our Services',
+
     // Business Info
     businessHours: 'Business Hours',
     address: 'Address',

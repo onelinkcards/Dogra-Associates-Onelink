@@ -3,25 +3,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { siteConfig } from '../data/site'
+import { playClickSound } from '../lib/playClickSound'
 
 export default function Footer() {
   return (
-    <footer className="w-full max-w-md mx-auto px-2 py-8">
+    <footer className="w-full max-w-md mx-auto py-8">
       <div className="text-center space-y-4">
         <p className="text-sm text-white font-medium">
           © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
         </p>
         <div className="space-y-3 pt-2 border-t border-gray-700">
           <div className="flex flex-col items-center gap-2">
-            <p className="text-sm text-white font-semibold flex items-center gap-1.5">
+            <p className="text-sm text-white font-semibold flex flex-wrap items-center justify-center gap-1.5">
               <span>OneLink</span>
               <Image
-                src="/gallery/onelink.png"
+                src="/gallery/onelinklogo.png"
                 alt="OneLink Logo"
                 width={40}
-                height={14}
-                className="opacity-100"
-                quality={100}
+                height={20}
+                className="opacity-95 object-contain"
                 priority
               />
               <span>— your business, one link away.</span>
@@ -30,6 +30,7 @@ export default function Footer() {
               href="https://repixelx.com/about"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playClickSound()}
               className="text-xs transition-colors inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(30, 30, 30, 0.8)',

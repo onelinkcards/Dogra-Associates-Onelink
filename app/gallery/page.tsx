@@ -8,15 +8,13 @@ import { ArrowLeft, ChevronLeft, ChevronRight, X, Image as ImageIcon, Video } fr
 
 // Gallery images from public/gallery folder
 const galleryImages = [
-  '/gallery/unnamed.webp',
-  '/gallery/unnamed (1).webp',
-  '/gallery/unnamed (2).webp',
-  '/gallery/unnamed (3).webp',
-  '/gallery/unnamed (4).webp',
-  '/gallery/unnamed (5).webp',
+  '/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.25.jpeg',
+  '/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.31.jpeg',
+  '/gallery/Green%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
+  '/gallery/Blue%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
 ]
 
-// No videos – show banner when on Videos tab
+// No videos – show empty state when on Videos tab
 const galleryVideos: { src: string; thumbnail: string; title: string }[] = []
 
 export default function GalleryPage() {
@@ -73,21 +71,31 @@ export default function GalleryPage() {
 
   return (
     <>
-      <main className="min-h-screen" style={{ backgroundColor: '#1a1a1a' }}>
-        <div className="border-b border-gray-700 sticky top-0 z-20 bg-[rgba(26,26,26,0.95)] backdrop-blur-md">
+      <main
+        className="min-h-screen"
+        style={{
+          backgroundColor: '#1a1a1a',
+          backgroundImage:
+            'radial-gradient(circle at 20% 30%, rgba(59,130,246,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 70%, rgba(147,197,253,0.12) 0%, transparent 50%)',
+        }}
+      >
+        <div
+          className="border-b border-gray-700 sticky top-0 z-20 bg-[rgba(26,26,26,0.95)] backdrop-blur-md"
+        >
           <div className="max-w-md mx-auto px-2 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
             <Link
               href="/#gallery"
-              className="p-2.5 sm:p-3 hover:bg-slate-800 rounded-full transition-colors"
+              className="p-2.5 sm:p-3 rounded-full transition-colors"
+              style={{ color: '#E5E7EB' }}
               onClick={() => {
                 if (typeof window !== 'undefined') {
                   sessionStorage.setItem('fromGallery', 'true')
                 }
               }}
             >
-              <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7 text-slate-200" />
+              <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: '#93C5FD' }} />
             </Link>
-            <h1 className="text-lg sm:text-xl font-bold text-white">Gallery</h1>
+            <h1 className="text-lg sm:text-xl font-bold" style={{ color: '#FFFFFF' }}>Gallery</h1>
           </div>
         </div>
 
@@ -96,28 +104,58 @@ export default function GalleryPage() {
             <motion.button
               onClick={() => setActiveTab('photos')}
               whileTap={{ scale: 0.98 }}
-              className={`flex-1 px-5 py-3.5 rounded-2xl font-semibold text-sm sm:text-base transition-all ${
+              className="flex-1 px-5 py-3.5 rounded-2xl font-semibold text-sm sm:text-base transition-all flex items-center justify-center"
+              style={
                 activeTab === 'photos'
-                  ? 'bg-mango-green text-white shadow-lg'
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700/90 border border-slate-700/50'
-              }`}
+                  ? {
+                      background: '#0F2A44',
+                      color: '#FFFFFF',
+                      boxShadow: '0 8px 20px rgba(15,42,68,0.15)',
+                      border: '1px solid rgba(59,130,246,0.35)',
+                    }
+                  : {
+                      background: 'rgba(15,23,42,0.65)',
+                      color: '#93C5FD',
+                      border: '1px solid rgba(59,130,246,0.45)',
+                      boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                    }
+              }
             >
               <span className="flex items-center justify-center gap-2.5">
-                <ImageIcon className={`w-5 h-5 ${activeTab === 'photos' ? 'text-white' : 'text-slate-400'}`} strokeWidth={2.5} />
+                <ImageIcon
+                  className="w-5 h-5"
+                  style={{ color: activeTab === 'photos' ? '#FFFFFF' : '#93C5FD' }}
+                  strokeWidth={2.5}
+                />
                 Photos
               </span>
             </motion.button>
             <motion.button
               onClick={() => setActiveTab('videos')}
               whileTap={{ scale: 0.98 }}
-              className={`flex-1 px-5 py-3.5 rounded-2xl font-semibold text-sm sm:text-base transition-all ${
+              className="flex-1 px-5 py-3.5 rounded-2xl font-semibold text-sm sm:text-base transition-all flex items-center justify-center"
+              style={
                 activeTab === 'videos'
-                  ? 'bg-mango-green text-white shadow-lg'
-                  : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700/90 border border-slate-700/50'
-              }`}
+                  ? {
+                      background: '#0F2A44',
+                      color: '#FFFFFF',
+                      boxShadow: '0 8px 20px rgba(15,42,68,0.15)',
+                      border: '1px solid rgba(59,130,246,0.35)',
+                    }
+                  : {
+                      background: 'rgba(15,23,42,0.65)',
+                      color: '#93C5FD',
+                      border: '1px solid rgba(59,130,246,0.45)',
+                      boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                    }
+              }
             >
               <span className="flex items-center justify-center gap-2.5">
-                <Video className={`w-5 h-5 ${activeTab === 'videos' ? 'text-white' : 'text-slate-400'}`} strokeWidth={2.5} />
+                <Video
+                  className="w-5 h-5"
+                  style={{ color: activeTab === 'videos' ? '#FFFFFF' : '#93C5FD' }}
+                  strokeWidth={2.5}
+                />
                 Videos
               </span>
             </motion.button>
@@ -149,19 +187,22 @@ export default function GalleryPage() {
             </div>
           )}
 
-          {/* No videos – banner */}
+          {/* No videos – empty state */}
           {activeTab === 'videos' && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-2xl border border-slate-600/50 bg-slate-800/60 p-8 sm:p-10 text-center"
+              className="rounded-2xl border border-slate-600/50 p-8 sm:p-10 text-center bg-slate-800/60"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-700/80 flex items-center justify-center">
-                <Video className="w-8 h-8 text-slate-400" strokeWidth={1.5} />
+              <div
+                className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                style={{ background: 'rgba(71,85,105,0.65)' }}
+              >
+                <Video className="w-8 h-8" style={{ color: '#93C5FD' }} strokeWidth={1.5} />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">No videos yet</h3>
-              <p className="text-sm text-slate-400 max-w-xs mx-auto">
-                Video content will appear here when available. Check back later.
+              <h3 className="text-lg font-semibold mb-2" style={{ color: '#FFFFFF' }}>No video uploaded</h3>
+              <p className="text-sm max-w-xs mx-auto" style={{ color: '#94A3B8' }}>
+                Videos will show here once uploaded. Check back later.
               </p>
             </motion.div>
           )}

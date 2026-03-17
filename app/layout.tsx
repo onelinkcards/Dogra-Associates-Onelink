@@ -78,8 +78,8 @@ export default function RootLayout({
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.contact.address,
-      addressLocality: 'Dehradun',
-      addressRegion: 'Uttarakhand',
+      addressLocality: 'Jammu',
+      addressRegion: 'Jammu & Kashmir',
       addressCountry: 'IN',
     },
     openingHoursSpecification: {
@@ -89,10 +89,10 @@ export default function RootLayout({
       closes: '22:00',
     },
     sameAs: [
-      siteConfig.social.facebook,
-      siteConfig.social.instagram,
-      siteConfig.social.twitter,
-      siteConfig.social.linkedin,
+      siteConfig.social?.facebook,
+      siteConfig.social?.instagram,
+      siteConfig.social?.twitter,
+      siteConfig.social?.linkedin,
     ].filter(Boolean),
   }
 
@@ -105,12 +105,13 @@ export default function RootLayout({
         />
         <style dangerouslySetInnerHTML={{ __html: `
           html, body { 
-            background-color: #1a1a1a;
+            background: #F7FAFF;
+            min-height: 100%;
           }
         ` }} />
       </head>
       <body className={`${poppins.className} antialiased min-h-screen`} style={{ 
-        backgroundColor: '#1a1a1a'
+        background: '#F7FAFF'
       }}>
         <LanguageProvider>
           <CartProvider>

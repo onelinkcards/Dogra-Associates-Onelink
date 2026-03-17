@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Copy, ArrowLeft, Check, Shield, Lock, Download, Share2, QrCode } from 'lucide-react'
+import { Copy, ArrowLeft, Check, Shield, Lock, Download, Share2, QrCode, Landmark } from 'lucide-react'
 import Image from 'next/image'
 import { useLanguage } from '../../../contexts/LanguageContext'
 import { shopConfig } from '../config'
 
 interface PaymentFaceProps {
   upiId: string
+  upiId2?: string
   upiName: string
   amountINR?: number
   upiQrImageUrl?: string
@@ -55,6 +56,7 @@ function useCopyToClipboard() {
 
 export default function PaymentFace({
   upiId,
+  upiId2,
   upiName,
   amountINR,
   upiQrImageUrl,
@@ -65,8 +67,11 @@ export default function PaymentFace({
   const { t } = useLanguage()
   const { copy: copyUpi, copied: upiCopied } = useCopyToClipboard()
   const { copy: copyBank, copied: bankCopied } = useCopyToClipboard()
+  const [lastCopiedUpiId, setLastCopiedUpiId] = useState<string | null>(null)
+  const [lastCopiedBankField, setLastCopiedBankField] = useState<string | null>(null)
   const [paymentModalOpen, setPaymentModalOpen] = useState(false)
   const [scannerModalOpen, setScannerModalOpen] = useState(false)
+  const [bankModalOpen, setBankModalOpen] = useState(false)
   const [canShare, setCanShare] = useState(false)
 
   const upiLink = buildUpiLink(upiId, upiName, amountINR)
@@ -267,15 +272,14 @@ export default function PaymentFace({
     }
   }
 
-  const handleCopyUpi = () => {
-    copyUpi(upiId)
+  const handleCopyUpi = (id: string) => {
+    setLastCopiedUpiId(id)
+    copyUpi(id)
   }
 
-  const handleCopyBank = () => {
-    if (bank) {
-      const bankDetails = `Bank: ${bank.bankName}${bank.branchName ? `\nBranch: ${bank.branchName}` : ''}\nAccount: ${bank.accountNumberMasked}\nIFSC: ${bank.ifsc}\nHolder: ${bank.accountHolder}`
-      copyBank(bankDetails)
-    }
+  const handleCopyBankField = (fieldLabel: string, value: string) => {
+    setLastCopiedBankField(fieldLabel)
+    copyBank(value)
   }
 
   // Handle Escape key to go back
@@ -296,17 +300,16 @@ export default function PaymentFace({
         background: 'radial-gradient(circle at 50% 50%, #1FB6D9 0%, #0E7490 50%, #111315 100%)',
         backfaceVisibility: 'hidden',
         willChange: 'transform',
-        minHeight: 'auto'
+        minHeight: 'auto',
       }}
     >
-      {/* Grain overlay */}
+      {/* Grain overlay – same as reference */}
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6 py-6 text-center" style={{ minHeight: '580px', paddingBottom: '2rem', pointerEvents: 'auto' }}>
         <motion.div
@@ -315,7 +318,7 @@ export default function PaymentFace({
           transition={{ delay: 0.1, duration: 0.4 }}
           className="w-full max-w-sm"
         >
-          {/* Title Section */}
+          {/* Title: Secure Payment + 100% Secure & Encrypted */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -323,19 +326,19 @@ export default function PaymentFace({
             className="mb-6"
           >
             <h2 className="text-2xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
-              {t('securePayment')}
+              Secure Payment
             </h2>
-            <div className="flex items-center justify-center gap-2 text-white/70 text-xs">
-              <Lock className="w-3.5 h-3.5" />
-              <span>{t('secureEncrypted')}</span>
+            <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
+              <Lock className="w-4 h-4" />
+              <span>100% Secure &amp; Encrypted</span>
             </div>
           </motion.div>
 
-          {/* Pay via Scanner Button */}
+          {/* 1. Pay via Scanner – white, border */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.3 }}
+            transition={{ delay: 0.4, duration: 0.3 }}
             className="mb-3"
           >
             <motion.button
@@ -348,27 +351,26 @@ export default function PaymentFace({
                 setScannerModalOpen(true)
               }}
               className="w-full bg-white hover:bg-gray-50 font-bold py-3 px-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2 cursor-pointer relative z-20 touch-manipulation border-[1.5px]"
-              style={{ 
+              style={{
                 WebkitTapHighlightColor: 'transparent',
                 borderColor: 'rgba(31, 182, 217, 0.35)',
                 color: '#0E7490',
-                boxShadow: '0 2px 8px rgba(14, 116, 144, 0.08)'
+                boxShadow: '0 2px 8px rgba(14, 116, 144, 0.08)',
               }}
               aria-label="Pay via Scanner"
             >
               <QrCode className="w-5 h-5" style={{ color: '#1FB6D9' }} />
-              <span className="pointer-events-none">Pay via Scanner</span>
+              <span>Pay via Scanner</span>
             </motion.button>
           </motion.div>
 
-          {/* Payment Buttons */}
+          {/* 2. Pay via UPI – teal, app logos */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.3 }}
             className="mb-3 relative z-20"
           >
-            {/* Pay via UPI Button */}
             <motion.button
               type="button"
               whileHover={{ scale: 1.02 }}
@@ -378,49 +380,55 @@ export default function PaymentFace({
                 e.stopPropagation()
                 setPaymentModalOpen(true)
               }}
-              className="w-full text-white font-bold py-3.5 px-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 cursor-pointer relative z-30 touch-manipulation"
-              style={{ 
+              className="w-full text-white font-bold py-3.5 px-6 rounded-2xl transition-all flex items-center justify-center gap-3 cursor-pointer relative z-30 touch-manipulation"
+              style={{
                 WebkitTapHighlightColor: 'transparent',
                 background: 'linear-gradient(135deg, #0E7490 0%, #1FB6D9 50%, #0E7490 100%)',
-                boxShadow: '0 4px 16px rgba(14, 116, 144, 0.3), 0 2px 8px rgba(14, 116, 144, 0.2)'
+                boxShadow: '0 4px 16px rgba(14, 116, 144, 0.3), 0 2px 8px rgba(14, 116, 144, 0.2)',
               }}
               aria-label="Pay via UPI"
             >
-              {/* Horizontal Payment Logos */}
               <div className="flex items-center gap-1.5">
-                <Image
-                  src="/logos/icons8-paytm-48.png"
-                  alt="Paytm"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                  style={{ filter: 'brightness(1.1) contrast(1.1)' }}
-                  unoptimized
-                />
-                <Image
-                  src="/logos/icons8-google-pay-48.png"
-                  alt="Google Pay"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                  style={{ filter: 'brightness(1.1) contrast(1.1)' }}
-                  unoptimized
-                />
-                <Image
-                  src="/logos/icons8-phone-pe-48.png"
-                  alt="PhonePe"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                  style={{ filter: 'brightness(1.1) contrast(1.1)' }}
-                  unoptimized
-                />
+                <Image src="/logos/icons8-paytm-48.png" alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" unoptimized />
+                <Image src="/logos/icons8-google-pay-48.png" alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" unoptimized />
+                <Image src="/logos/icons8-phone-pe-48.png" alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" unoptimized />
               </div>
               <span>{t('payViaUPI')}</span>
             </motion.button>
           </motion.div>
 
-          {/* Back Button */}
+          {/* 3. Transfer via Bank – purple */}
+          {bank && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.3 }}
+              className="mb-3"
+            >
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setBankModalOpen(true)
+                }}
+                className="w-full text-white font-bold py-3.5 px-6 rounded-2xl transition-all flex items-center justify-center gap-3 cursor-pointer relative z-20 touch-manipulation"
+                style={{
+                  WebkitTapHighlightColor: 'transparent',
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)',
+                  boxShadow: '0 4px 14px rgba(124, 58, 237, 0.35)',
+                }}
+                aria-label="Transfer via Bank"
+              >
+                <Landmark className="w-5 h-5" />
+                <span>Transfer via Bank</span>
+              </motion.button>
+            </motion.div>
+          )}
+
+          {/* 4. Back to Details – grey, border */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -445,27 +453,23 @@ export default function PaymentFace({
             </motion.button>
           </motion.div>
 
-          {/* Helper Text */}
+          {/* Helper text */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.3 }}
-            className="mt-4"
+            className="mt-3"
           >
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Shield className="w-4 h-4 text-mango-green" />
-              <p className="text-white/80 text-xs font-medium">
-                {t('securePaymentGateway')}
-              </p>
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Shield className="w-4 h-4" style={{ color: '#06b6d4' }} />
+              <p className="text-white/80 text-xs font-medium">{t('securePaymentGateway')}</p>
             </div>
-            <p className="text-white/60 text-xs">
-              {t('worksWith')}
-            </p>
+            <p className="text-white/60 text-xs">{t('worksWith')}</p>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* OneLink Branding - Bottom Edge */}
+      {/* OneLink Branding - Bottom Edge (match reference: light pill) */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -473,36 +477,34 @@ export default function PaymentFace({
         className="absolute bottom-0 left-0 right-0 pb-3 pt-2 px-4"
       >
         <div className="flex items-center justify-center">
-          <div 
+          <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
             style={{
               fontFamily: 'var(--font-inter), Inter, sans-serif',
-              background: 'linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%)',
-              borderColor: '#5eead4'
+              background: 'rgba(0,0,0,0.55)',
+              borderColor: '#3B82F6',
             }}
           >
-            <Shield className="w-3.5 h-3.5" style={{ color: '#06b6d4' }} />
-            <span 
+            <Shield className="w-3.5 h-3.5" style={{ color: '#3B82F6' }} />
+            <span
               className="text-xs font-semibold flex items-center gap-1.5"
-              style={{ 
-                color: '#06b6d4',
+              style={{
+                color: '#60A5FA',
                 fontSize: '12px',
-                fontWeight: 600
+                fontWeight: 600,
               }}
             >
               Secure payment gateway
-              <span style={{ color: '#94a3b8' }}>•</span>
-              OneLink
+              <span style={{ color: 'rgba(96,165,250,0.9)' }}>•</span>
+              <Image
+                src="/gallery/onelinklogo.png"
+                alt="OneLink Logo"
+                width={32}
+                height={11}
+                className="opacity-95 object-contain"
+                priority
+              />
             </span>
-            <Image
-              src="/gallery/onelink.png"
-              alt="OneLink Logo"
-              width={32}
-              height={11}
-              className="opacity-100"
-              quality={100}
-              priority
-            />
           </div>
         </div>
       </motion.div>
@@ -547,42 +549,80 @@ export default function PaymentFace({
                 Pay via UPI ID
               </h3>
               
-              <div className="mb-6 relative z-30 space-y-4">
+              <div className="mb-4 relative z-30 space-y-4">
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-xl">
-                  <p className="text-white/70 text-xs mb-3 text-center tracking-wide uppercase font-medium">UPI ID</p>
+                  <p className="text-white/70 text-xs mb-3 text-center tracking-wide uppercase font-medium">UPI IDs</p>
                   
-                  {/* UPI ID Display - Full Width */}
-                  <div className="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
-                    <p className="text-white font-bold text-xl text-center break-all select-all" style={{ wordBreak: 'break-all', lineHeight: '1.5' }}>
-                      {upiId}
-                    </p>
-                  </div>
-                  
-                  {/* Copy Button - Full Width */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      copyUpi(upiId)
-                    }}
-                    className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-3 px-5 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2 mb-4"
-                    style={{ WebkitTapHighlightColor: 'transparent' }}
-                    aria-label="Copy UPI ID"
-                  >
-                    {upiCopied ? (
-                      <>
-                        <Check className="w-5 h-5" />
-                        <span className="text-sm font-bold">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-5 h-5" />
-                        <span className="text-sm font-bold">Copy UPI ID</span>
-                      </>
+                  {/* UPI ID(s) Display */}
+                  <div className="bg-white/5 rounded-xl p-4 mb-3 border border-white/10 space-y-2">
+                    <div className="flex items-center justify-between gap-3">
+                      <p
+                        className="text-white font-bold text-base break-all select-all"
+                        style={{ wordBreak: 'break-all', lineHeight: '1.35' }}
+                      >
+                        {upiId}
+                      </p>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleCopyUpi(upiId)
+                        }}
+                        className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        aria-label="Copy UPI ID 1"
+                      >
+                        {upiCopied && lastCopiedUpiId === upiId ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copy</span>
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
+
+                    {upiId2 && (
+                      <div className="flex items-center justify-between gap-3">
+                        <p
+                          className="text-white font-bold text-base break-all select-all"
+                          style={{ wordBreak: 'break-all', lineHeight: '1.35' }}
+                        >
+                          {upiId2}
+                        </p>
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            handleCopyUpi(upiId2)
+                          }}
+                          className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                          style={{ WebkitTapHighlightColor: 'transparent' }}
+                          aria-label="Copy UPI ID 2"
+                        >
+                          {upiCopied && lastCopiedUpiId === upiId2 ? (
+                            <>
+                              <Check className="w-4 h-4" />
+                              <span className="text-xs font-bold">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" />
+                              <span className="text-xs font-bold">Copy</span>
+                            </>
+                          )}
+                        </motion.button>
+                      </div>
                     )}
-                  </motion.button>
+                  </div>
                   
                   {/* Instructions */}
                   <div className="grid grid-cols-1 gap-2.5 text-white/80 text-xs pt-2 border-t border-white/10">
@@ -599,6 +639,10 @@ export default function PaymentFace({
                       <span>Enter amount and complete the payment.</span>
                     </div>
                   </div>
+
+                  <p className="text-white/90 text-sm text-center font-medium mt-3">
+                    After payment, please share screenshot on WhatsApp.
+                  </p>
                 </div>
               </div>
 
@@ -611,6 +655,199 @@ export default function PaymentFace({
                   e.preventDefault()
                   e.stopPropagation()
                   setPaymentModalOpen(false)
+                }}
+                className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-2.5 px-4 rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer relative z-30 touch-manipulation"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <span>{t('close')}</span>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Bank Transfer Modal */}
+      <AnimatePresence>
+        {bankModalOpen && bank && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-50 rounded-[28px] flex items-center justify-center"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(31, 182, 217, 0.95) 0%, rgba(14, 116, 144, 0.95) 50%, rgba(17, 19, 21, 0.98) 100%)',
+              backdropFilter: 'blur(10px)',
+            }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setBankModalOpen(false)
+            }}
+          >
+            <div
+              className="absolute inset-0 opacity-[0.06] pointer-events-none rounded-[28px]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+              }}
+            />
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-50 w-full max-w-md px-6"
+              onClick={(e) => e.stopPropagation()}
+              style={{ pointerEvents: 'auto' }}
+            >
+              <h3 className="text-2xl font-black text-white mb-4 tracking-tight drop-shadow-lg text-center">
+                Transfer via Bank
+              </h3>
+
+              <div className="space-y-3 mb-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-xl">
+                  <p className="text-white/70 text-xs mb-3 text-center tracking-wide uppercase font-medium">
+                    Bank Details
+                  </p>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-white/70 text-xs">Bank Name</p>
+                        <p className="text-white font-bold text-sm break-all select-all">{bank.bankName}</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleCopyBankField('Bank Name', bank.bankName)
+                        }}
+                        className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        aria-label="Copy Bank Name"
+                      >
+                        {bankCopied && lastCopiedBankField === 'Bank Name' ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copy</span>
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-white/70 text-xs">Account Holder</p>
+                        <p className="text-white font-bold text-sm break-all select-all">{bank.accountHolder}</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleCopyBankField('Account Holder', bank.accountHolder)
+                        }}
+                        className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        aria-label="Copy Account Holder"
+                      >
+                        {bankCopied && lastCopiedBankField === 'Account Holder' ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copy</span>
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-white/70 text-xs">A/C No</p>
+                        <p className="text-white font-bold text-sm break-all select-all">{bank.accountNumberMasked}</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleCopyBankField('A/C No', bank.accountNumberMasked)
+                        }}
+                        className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        aria-label="Copy A/C No"
+                      >
+                        {bankCopied && lastCopiedBankField === 'A/C No' ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copy</span>
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-white/70 text-xs">IFSC</p>
+                        <p className="text-white font-bold text-sm break-all select-all">{bank.ifsc}</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleCopyBankField('IFSC', bank.ifsc)
+                        }}
+                        className="shrink-0 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold px-3 rounded-xl border border-white/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        style={{ WebkitTapHighlightColor: 'transparent' }}
+                        aria-label="Copy IFSC"
+                      >
+                        {bankCopied && lastCopiedBankField === 'IFSC' ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            <span className="text-xs font-bold">Copy</span>
+                          </>
+                        )}
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-white/90 text-sm text-center font-medium mb-4">
+                After payment, please share screenshot on WhatsApp.
+              </p>
+
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setBankModalOpen(false)
                 }}
                 className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-2.5 px-4 rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer relative z-30 touch-manipulation"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
@@ -658,19 +895,22 @@ export default function PaymentFace({
               onClick={(e) => e.stopPropagation()}
               style={{ pointerEvents: 'auto', maxHeight: '90vh', overflowY: 'auto' }}
             >
-              <h3 className="text-xl font-black text-white mb-3 tracking-tight drop-shadow-lg text-center">
+              <h3 className="text-xl font-black text-white mb-2 tracking-tight drop-shadow-lg text-center">
                 Scan to Pay
               </h3>
+              <p className="text-white/80 text-xs text-center mb-3">
+                (GPay, PhonePe, Paytm, BHIM)
+              </p>
               
-              {/* Scanner Image */}
+              {/* Scanner / QR Image */}
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 mb-3">
                 <div className="flex justify-center mb-2">
                   <Image
                     src={scannerImage || shopConfig.payment.scannerImage}
-                    alt="Payment Scanner"
-                    width={250}
-                    height={250}
-                    className="w-full max-w-[250px] h-auto object-contain rounded-2xl"
+                    alt="Scan to pay – UPI QR"
+                    width={280}
+                    height={280}
+                    className="w-full max-w-[280px] h-auto object-contain rounded-2xl"
                     priority
                     unoptimized
                   />

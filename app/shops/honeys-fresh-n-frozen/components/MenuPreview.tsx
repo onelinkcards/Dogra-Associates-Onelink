@@ -2,90 +2,84 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import {
+  ArrowRight,
+  FileText,
+  Building2,
+  CheckCircle,
+  BarChart3,
+  Calendar,
+  type LucideIcon,
+} from 'lucide-react'
 import Image from 'next/image'
-import { menuCategories } from '../menu'
+import { servicesPreviewCards } from '../services'
 
-const categoryOrder: (keyof typeof menuCategories)[] = [
-  'burgerPizza',
-  'sandwichSalad',
-  'momos',
-  'pastaMaggiFries',
-  'healthyDrinks',
-  'wraps',
-  'mojitosSmoothies',
-  'shakesIceCream',
-  'starters',
-  'hotBeverages',
-  'riceNoodlesSoups',
-  'combos',
-  'mainCourse',
-  'thali',
-]
-
-// Show only 4 categories on home section
-const previewCategories = categoryOrder.slice(0, 4)
+const cardIconMap: Record<(typeof servicesPreviewCards)[number]['key'], LucideIcon> = {
+  taxGst: FileText,
+  businessCompliance: Building2,
+  auditFinancial: CheckCircle,
+  advisoryPlanning: BarChart3,
+}
 
 export default function MenuPreview() {
   return (
-    <section id="menu" className="w-full max-w-md mx-auto px-2 py-6">
+    <section id="services" className="w-full max-w-md mx-auto py-8">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="mb-6 px-1"
+        className="mb-6"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
-          Our Menu
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-white">
+          Our Services
         </h2>
-        <p className="text-sm sm:text-base text-slate-300 font-medium">
-          Fresh • Pure Veg • Made with Care
+        <p className="text-sm sm:text-base font-medium text-white/90">
+          Tax • GST • Business Compliance • Financial Advisory
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-        {previewCategories.map((key, index) => {
-          const category = menuCategories[key]
+      {/* 4 card grid – same layout & sizing as Mango Our Menu */}
+      <div className="grid grid-cols-2 gap-3 mb-6">
+        {servicesPreviewCards.map((card, index) => {
+          const IconComponent = cardIconMap[card.key]
           return (
-            <Link key={key} href={`/menu?cat=${key}`}>
+            <Link key={card.key} href={card.href} className="block">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: index * 0.06, duration: 0.4, ease: 'easeOut' }}
-                className="relative h-48 rounded-2xl overflow-hidden cursor-pointer group shadow-lg hover:shadow-xl transition-all"
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: index * 0.05, duration: 0.35, ease: 'easeOut' }}
+                className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group shadow-lg transition-all duration-300 border border-white/10"
               >
                 <Image
-                  src={category.image}
-                  alt={category.name}
+                  src={card.image}
+                  alt={card.name}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 448px) 50vw, 224px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
                 <div
-                  className="absolute top-3 right-3 w-12 h-12 rounded-full flex items-center justify-center z-10"
+                  className="absolute inset-0 z-[1]"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.15)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(255, 255, 255, 0.35)',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 25%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.25) 75%, rgba(0,0,0,0.05) 100%)',
                   }}
-                >
-                  <span className="text-2xl">{category.icon}</span>
+                />
+                {/* Icon: top-right corner – same as Mango */}
+                <div className="absolute top-3 right-3 w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center z-10 bg-white/20 border border-white/40 shadow-lg">
+                  <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white" strokeWidth={2} />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                  <h3 className="text-white font-bold text-lg mb-1 leading-tight drop-shadow-lg">
-                    {category.name}
+                {/* Text: title bold white, subtitle lighter – gallery card style like Mango */}
+                <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-10">
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-0.5 leading-tight line-clamp-2" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.85)' }}>
+                    {card.name}
                   </h3>
-                  <p className="text-white/95 text-sm font-medium leading-relaxed drop-shadow-md mb-3">
-                    {category.shortDescription}
+                  <p className="text-slate-300 text-xs sm:text-sm font-medium leading-snug mb-2 line-clamp-2" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7)' }}>
+                    {card.shortDescription}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-white font-semibold text-sm bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                    View Items
-                    <ArrowRight className="w-4 h-4" />
+                  <span className="inline-flex items-center gap-1.5 text-slate-200 font-semibold text-xs sm:text-sm bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors border border-white/30">
+                    View Services
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </span>
                 </div>
               </motion.div>
@@ -99,13 +93,37 @@ export default function MenuPreview() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.15, duration: 0.3 }}
+        className="flex gap-3"
+        style={{ marginTop: 18 }}
       >
         <Link
-          href="/menu"
-          className="block w-full bg-mango-green hover:bg-mango-greenSoft text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+          href="/services"
+          className="flex-1 flex items-center justify-center gap-2 rounded-[14px] font-semibold text-[15px] transition-opacity hover:opacity-95"
+          style={{
+            background: 'linear-gradient(135deg, #1E40AF 0%, #3A7BD5 100%)',
+            color: '#FFFFFF',
+            padding: 14,
+            fontWeight: 600,
+            boxShadow: '0 10px 25px rgba(59, 130, 246, 0.35)',
+          }}
         >
-          View Full Menu
-          <ArrowRight className="w-5 h-5" />
+          View All Services
+          <ArrowRight className="w-5 h-5 flex-shrink-0" />
+        </Link>
+        <Link
+          href="/services"
+          className="flex-1 flex items-center justify-center gap-2 rounded-[14px] font-semibold text-[15px] transition-all duration-300 hover:opacity-95 active:scale-[0.98]"
+          style={{
+            background: '#FFFFFF',
+            color: '#0F2A44',
+            border: '1px solid rgba(59, 130, 246, 0.35)',
+            boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)',
+            padding: 14,
+            fontWeight: 600,
+          }}
+        >
+          <Calendar className="w-5 h-5 flex-shrink-0" style={{ color: '#1E40AF' }} />
+          Book Services
         </Link>
       </motion.div>
     </section>

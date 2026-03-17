@@ -7,11 +7,11 @@ import Hero from './shops/honeys-fresh-n-frozen/components/Hero'
 import About from './shops/honeys-fresh-n-frozen/components/About'
 import MenuPreview from './shops/honeys-fresh-n-frozen/components/MenuPreview'
 import Services from './shops/honeys-fresh-n-frozen/components/Services'
-import SocialConnect from './shops/honeys-fresh-n-frozen/components/SocialConnect'
 import ContactCard from './shops/honeys-fresh-n-frozen/components/ContactCard'
 // Shop-specific components (Gallery and Reviews)
 import Gallery from './shops/honeys-fresh-n-frozen/components/Gallery'
 import GoogleReviews from './shops/honeys-fresh-n-frozen/components/GoogleReviews'
+import UrgencyCTA from './shops/honeys-fresh-n-frozen/components/UrgencyCTA'
 // Shared components
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
@@ -21,11 +21,18 @@ export default function Home() {
   const [showLoading, setShowLoading] = useState(true)
 
   useEffect(() => {
-    // Check if coming from gallery, menu, or reviews page - skip loading screen
+    // Check if coming from gallery, services, or reviews page - skip loading screen
     if (typeof window !== 'undefined') {
-      const fromGallery = sessionStorage.getItem('fromGallery')
-      const fromMenu = sessionStorage.getItem('fromMenu')
-      const fromReviews = sessionStorage.getItem('fromReviews')
+      let fromGallery: string | null = null
+      let fromServices: string | null = null
+      let fromReviews: string | null = null
+      try {
+        fromGallery = sessionStorage.getItem('fromGallery')
+        fromServices = sessionStorage.getItem('fromServices')
+        fromReviews = sessionStorage.getItem('fromReviews')
+      } catch {
+        // sessionStorage may be unavailable
+      }
       
       if (fromGallery === 'true') {
         // Skip loading screen when coming from gallery
@@ -33,27 +40,17 @@ export default function Home() {
         sessionStorage.removeItem('fromGallery')
         
         // Scroll to gallery section
-        setTimeout(() => {
-          const gallerySection = document.getElementById('gallery')
-          if (gallerySection) {
-            gallerySection.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 100)
+        setTimeout(() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }), 100)
         return
       }
       
-      if (fromMenu === 'true') {
-        // Skip loading screen when coming from menu
+      if (fromServices === 'true') {
+        // Skip loading screen when coming from services page
         setShowLoading(false)
-        sessionStorage.removeItem('fromMenu')
+        sessionStorage.removeItem('fromServices')
         
-        // Scroll to menu section
-        setTimeout(() => {
-          const menuSection = document.getElementById('menu')
-          if (menuSection) {
-            menuSection.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 100)
+        // Scroll to services section
+        setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100)
         return
       }
       
@@ -63,25 +60,20 @@ export default function Home() {
         sessionStorage.removeItem('fromReviews')
         
         // Scroll to reviews section
-        setTimeout(() => {
-          const reviewsSection = document.getElementById('reviews')
-          if (reviewsSection) {
-            reviewsSection.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 100)
+        setTimeout(() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }), 100)
         return
       }
     }
 
-    // Show loading screen on every page load/refresh for 3.5 seconds
+    // Show loading screen on every page load/refresh briefly (avoid "stuck" look)
     const timer = setTimeout(() => {
       setShowLoading(false)
-    }, 3500)
+    }, 1600)
 
     // Fallback: ensure loading screen always disappears after 5 seconds max
     const fallbackTimer = setTimeout(() => {
       setShowLoading(false)
-    }, 5000)
+    }, 2500)
 
     return () => {
       clearTimeout(timer)
@@ -107,16 +99,16 @@ export default function Home() {
       </AnimatePresence>
       {!showLoading && (
         <main 
-          className="min-h-screen pb-12 relative z-10"
+          className="min-h-screen pb-12 relative z-10 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]"
           style={{ backgroundColor: '#1a1a1a' }}
         >
           <Hero />
           <About />
           <MenuPreview />
           <Services />
-          <Gallery />
           <GoogleReviews />
-          <SocialConnect />
+          <UrgencyCTA />
+          <Gallery />
           <ContactCard />
           <Footer />
           <BackToTop />

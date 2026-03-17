@@ -51,8 +51,7 @@ export default function ReviewForm() {
         whileTap={{ scale: 0.98 }}
         className="w-full text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 relative overflow-hidden"
         style={{ 
-          background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%)',
-          boxShadow: '0 4px 15px rgba(37, 99, 235, 0.4)'
+          background: '#334155',
         }}
       >
         {/* Shine effect */}

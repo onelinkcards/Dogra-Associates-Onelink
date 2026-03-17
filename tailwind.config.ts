@@ -94,12 +94,28 @@ const config: Config = {
           green: '#228B22',
         },
         mango: {
-          primary: '#F4A300',
-          primarySoft: '#FFB938',
-          green: '#1E4D3D',
-          greenSoft: '#2F6B55',
-          lightGreen: '#E8F3EE',
-          textDark: '#1A1A1A',
+          primary: '#334155',
+          primarySoft: '#475569',
+          green: '#334155',
+          greenSoft: '#475569',
+          lightGreen: '#f1f5f9',
+          textDark: '#0f172a',
+        },
+        trust: {
+          primary: '#475569',
+          primarySoft: '#64748b',
+          primaryDark: '#334155',
+          light: '#f1f5f9',
+          lightBlue: '#f8fafc',
+          blue: '#64748b',
+        },
+        premium: {
+          dark: '#1e293b',
+          darker: '#0f172a',
+          slate: '#334155',
+          muted: '#64748b',
+          border: '#475569',
+          accent: '#57534e',
         },
       },
       borderRadius: {
@@ -144,6 +160,10 @@ const config: Config = {
           "0%, 100%": { boxShadow: "0 0 20px rgba(234, 179, 8, 0.3)" },
           "50%": { boxShadow: "0 0 40px rgba(234, 179, 8, 0.6)" },
         },
+        "border-shine": {
+          "0%, 100%": { boxShadow: "0 0 0 2px rgba(148, 163, 184, 0.35), 0 10px 40px rgba(0,0,0,0.1)" },
+          "50%": { boxShadow: "0 0 0 2px rgba(148, 163, 184, 0.6), 0 10px 40px rgba(0,0,0,0.1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -155,6 +175,7 @@ const config: Config = {
         "shimmer": "shimmer 2s infinite",
         "float": "float 3s ease-in-out infinite",
         "glow": "glow 2s ease-in-out infinite",
+        "border-shine": "border-shine 3s ease-in-out infinite",
       },
       backgroundImage: {
         'paper-texture': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E\")",
