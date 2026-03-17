@@ -502,7 +502,7 @@ export default function Hero() {
                       )
                     })}
                     <span
-                      className="inline-flex items-center gap-1.5 px-2 py-[4px] rounded-full text-[11px] font-bold whitespace-nowrap"
+                      className="inline-flex items-center gap-2 px-2.5 py-[4px] rounded-full text-[12px] font-bold whitespace-nowrap"
                       style={{
                         background: openStatus.isOpen ? 'rgba(34,197,94,0.14)' : 'rgba(239,68,68,0.14)',
                         color: openStatus.isOpen ? '#16a34a' : '#ef4444',
@@ -514,7 +514,7 @@ export default function Hero() {
                       title={shopConfig?.contact?.storeHours || 'Office hours'}
                     >
                       <Clock
-                        className="w-3.5 h-3.5 flex-shrink-0"
+                        className="w-4 h-4 flex-shrink-0"
                         style={{ color: openStatus.isOpen ? '#16a34a' : '#ef4444' }}
                         strokeWidth={2.2}
                       />
@@ -522,8 +522,8 @@ export default function Hero() {
                       <span
                         style={{
                           display: 'inline-block',
-                          marginLeft: 6,
-                          fontSize: '9.5px',
+                          marginLeft: 8,
+                          fontSize: '10px',
                           fontWeight: 700,
                           opacity: 0.95,
                           whiteSpace: 'nowrap',
@@ -599,12 +599,14 @@ export default function Hero() {
 
             {/* Content – white text, glass blocks like Mango */}
             <div
-              className="relative flex-1 flex flex-col items-center min-h-0 text-white overflow-hidden overflow-x-hidden"
+              className="relative flex-1 flex flex-col items-center justify-center min-h-0 text-white overflow-hidden overflow-x-hidden"
               style={{
                 paddingLeft: 'max(1rem, env(safe-area-inset-left) + 4px)',
                 paddingRight: 'max(1rem, env(safe-area-inset-right) + 4px)',
-                paddingTop: '4rem',
-                paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom) + 1rem)',
+                // Use clamped padding + vertical centering to avoid "empty space" feel
+                // while keeping room for the top-right "Tap to Return" control.
+                paddingTop: 'clamp(2.6rem, 5.5vh, 4rem)',
+                paddingBottom: 'max(1rem, env(safe-area-inset-bottom) + 0.75rem)',
               }}
             >
               <motion.div
@@ -614,8 +616,11 @@ export default function Hero() {
                 className="w-full flex flex-col items-center max-w-[calc(100%-0.25rem)] flex-shrink-0 gap-0"
               >
                 <h2 className="text-xl sm:text-2xl font-black mb-4 pt-1 pb-1 tracking-wide text-white text-center w-full [text-shadow:0_1px_3px_rgba(0,0,0,0.25)]">
-                  Business Snapshot
+                  Business Overview
                 </h2>
+                <p className="text-xs sm:text-sm leading-relaxed text-white/90 text-center mb-4 w-full">
+                  Chartered Accountancy support for income tax, GST filing, compliance and audits in Jammu.
+                </p>
 
                 {/* Block 1: Location – glass block, icon in square */}
                 <div className="flex items-start gap-3 w-full mb-3 rounded-2xl p-3 sm:p-4 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
@@ -636,7 +641,7 @@ export default function Hero() {
                     <Store className="w-5 h-5 text-white drop-shadow-md" />
                   </div>
                   <div className="min-w-0 flex-1 text-left">
-                    <p className="text-sm font-bold leading-snug text-white/95">Served</p>
+                    <p className="text-sm font-bold leading-snug text-white/95">Services Offered</p>
                     <p className="text-xs sm:text-sm leading-relaxed text-white/90">
                       {('snapshotServicesLine' in shopConfig && (shopConfig as { snapshotServicesLine?: string }).snapshotServicesLine) || (shopConfig as { serviceTagline?: string }).serviceTagline}
                     </p>
@@ -655,6 +660,22 @@ export default function Hero() {
                     </p>
                   </div>
                 </div>
+
+                {/* Block 4: Consultation Available – icon in square */}
+                <div className="flex items-start gap-3 w-full mb-3 rounded-2xl p-3 sm:p-4 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/20 border border-white/30 shadow-md">
+                    <Calendar className="w-5 h-5 text-white drop-shadow-md" />
+                  </div>
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-sm font-bold leading-snug text-white/95">Consultation Available</p>
+                    <p className="text-xs sm:text-sm leading-relaxed text-white/90">
+                      Book a consultation via WhatsApp or call our office.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Small heading above map */}
+                <p className="text-sm font-bold leading-snug text-white/95 w-full mb-2">Visit Our Office</p>
 
                 {/* Google Map – glass style */}
                 <div className="w-full h-28 sm:h-32 rounded-2xl overflow-hidden mb-4 pointer-events-none flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
@@ -689,8 +710,30 @@ export default function Hero() {
                     style={{ fontSize: 'clamp(13px, 3.5vw, 15px)', WebkitTapHighlightColor: 'transparent' }}
                   >
                     <MapPin className="w-5 h-5 flex-shrink-0 text-white" />
-                    Open in Maps
+                    Get Directions
                   </motion.a>
+
+                  {/* Small CTA below map */}
+                  <div className="w-full flex flex-col items-center mt-3">
+                    <p className="text-xs sm:text-sm font-semibold text-white/90 text-center mb-2">
+                      Need help with tax or compliance?
+                    </p>
+                    <motion.button
+                      type="button"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        handleOpenAppointment()
+                      }}
+                      className="inline-flex items-center justify-center gap-2 bg-white/25 hover:bg-white/35 active:bg-white/40 text-white font-semibold px-6 py-3.5 rounded-full border border-white/30 backdrop-blur-sm touch-manipulation pointer-events-auto shadow-[0_10px_25px_rgba(0,0,0,0.3)] min-h-[48px] min-w-[180px]"
+                      style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}
+                    >
+                      <Calendar className="w-5 h-5 flex-shrink-0 text-white" />
+                      Book Consultation
+                    </motion.button>
+                  </div>
                 </div>
               </motion.div>
             </div>

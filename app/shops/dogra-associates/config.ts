@@ -17,9 +17,10 @@ export const shopConfig = {
   serviceTagline: "Tax Advisory • Compliance • Financial Services",
   // Business Snapshot (back of card) copy
   snapshotLocationLine: "Dogra Associates, Jammu",
-  snapshotServicesLine: "Income Tax • GST • Company Registration",
+  snapshotServicesLine:
+    "Income Tax • GST Filing • GST Returns • TDS/TCS • Audit & Compliance • Company/LLP Registration",
   snapshotHours: "Mon–Sat 10:30 AM – 7:00 PM",
-  url: "https://honeymoneyfish.co",
+  url: "https://carammit.onelink.cards",
   cardType: "B2C" as const,
   keywordBadges: ["ICAI Registered", "20+ Years Experience", "Tax & GST Expert"] as string[],
 

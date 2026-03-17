@@ -12,7 +12,7 @@ export interface ContactPerson {
 export const siteConfig = {
   name: "Dogra Associates",
   tagline: "Ramit Khurana – Chartered Accountant",
-  url: "https://honeymoneyfish.co",
+  url: "https://carammit.onelink.cards",
 
   contact: {
     phones: ["9086038829", "9419238829"],
