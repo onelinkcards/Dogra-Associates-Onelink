@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { siteConfig } from '../data/site'
-import { shopConfig } from '../shops/honeys-fresh-n-frozen/config'
+import { shopConfig } from '../shops/dogra-associates/config'
 
 export default function LoadingScreen() {
   return (

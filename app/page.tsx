@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 // Shop-specific components
-import Hero from './shops/honeys-fresh-n-frozen/components/Hero'
-import About from './shops/honeys-fresh-n-frozen/components/About'
-import MenuPreview from './shops/honeys-fresh-n-frozen/components/MenuPreview'
-import Services from './shops/honeys-fresh-n-frozen/components/Services'
-import ContactCard from './shops/honeys-fresh-n-frozen/components/ContactCard'
+import Hero from './shops/dogra-associates/components/Hero'
+import About from './shops/dogra-associates/components/About'
+import MenuPreview from './shops/dogra-associates/components/MenuPreview'
+import Services from './shops/dogra-associates/components/Services'
+import ContactCard from './shops/dogra-associates/components/ContactCard'
 // Shop-specific components (Gallery and Reviews)
-import Gallery from './shops/honeys-fresh-n-frozen/components/Gallery'
-import GoogleReviews from './shops/honeys-fresh-n-frozen/components/GoogleReviews'
-import UrgencyCTA from './shops/honeys-fresh-n-frozen/components/UrgencyCTA'
+import Gallery from './shops/dogra-associates/components/Gallery'
+import GoogleReviews from './shops/dogra-associates/components/GoogleReviews'
+import UrgencyCTA from './shops/dogra-associates/components/UrgencyCTA'
 // Shared components
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'

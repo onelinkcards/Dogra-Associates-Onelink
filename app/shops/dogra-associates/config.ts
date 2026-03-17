@@ -120,8 +120,8 @@ export const shopConfig = {
 
   assets: {
     logo: "/1eb5f5883a760d9c9fe0132343447f06.jpg",
-    gallery: "/shops/honeys-fresh-n-frozen/assets/gallery/",
-    qr: "/shops/honeys-fresh-n-frozen/assets/qr/scan.png",
+    gallery: "/shops/dogra-associates/assets/gallery/",
+    qr: "/shops/dogra-associates/assets/qr/scan.png",
   },
 
   catalog: [] as Array<{ id: string; title: string; description: string; logo: string; details: string; images: string[] }>,

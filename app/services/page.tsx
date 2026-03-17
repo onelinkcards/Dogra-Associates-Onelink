@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { ArrowLeft, Check, ArrowRight } from 'lucide-react'
-import { serviceCategories } from '../shops/honeys-fresh-n-frozen/services'
-import { shopConfig } from '../shops/honeys-fresh-n-frozen/config'
+import { serviceCategories } from '../shops/dogra-associates/services'
+import { shopConfig } from '../shops/dogra-associates/config'
 import { getWhatsAppLink } from '../lib/phone'
-import type { ServiceCategoryKey, ServiceItem } from '../shops/honeys-fresh-n-frozen/services'
+import type { ServiceCategoryKey, ServiceItem } from '../shops/dogra-associates/services'
 
 const categoryKeys: ServiceCategoryKey[] = [
   'incomeTax',

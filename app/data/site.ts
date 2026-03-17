@@ -59,9 +59,11 @@ export const siteConfig = {
   },
 
   seo: {
-    title: "Dogra Associates | Ramit Khurana – Chartered Accountant",
-    description: "Dogra Associates – Ramit Khurana, Chartered Accountant & Managing Partner. Tax advisory, GST compliance, audit and financial services. 20+ years experience.",
-    keywords: "Dogra Associates, Chartered Accountant Jammu, CA Ramit Khurana, Tax Advisory, GST Compliance, ICAI Registered",
+    title: 'Dogra Associates | Ramit Khurana CA in Jammu | Tax & GST Expert',
+    description:
+      'Need a CA in Jammu or a Chartered Accountant Jammu for income tax, GST filing Jammu, audit and compliance? Led by Ramit Khurana CA, Dogra Associates helps individuals and businesses with GST filing Jammu and Income tax consultant Jammu support - stress-free, on time, and fully compliant.',
+    keywords:
+      'Dogra Associates, Ramit Khurana CA, Chartered Accountant Jammu, CA in Jammu, GST filing Jammu, Income tax consultant Jammu, GST and Tax Consultant Jammu',
   },
 
   credits: {

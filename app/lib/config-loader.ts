@@ -1,10 +1,10 @@
-import { shopConfig, type ShopConfig } from '../shops/honeys-fresh-n-frozen/config'
+import { shopConfig, type ShopConfig } from '../shops/dogra-associates/config'
 
 let cachedConfig: ShopConfig | null = null
 
 // Admin Panel public API endpoint (set via env var, fallback to localhost for dev)
 const ADMIN_PANEL_URL = process.env.NEXT_PUBLIC_ADMIN_PANEL_URL || 'http://localhost:3002'
-const SHOP_SLUG = 'honeys-fresh-n-frozen'
+const SHOP_SLUG = 'dogra-associates'
 
 export async function loadConfig(): Promise<ShopConfig> {
   // Return cached config if available

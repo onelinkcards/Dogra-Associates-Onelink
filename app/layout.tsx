@@ -4,6 +4,7 @@ import './globals.css'
 import { siteConfig } from './data/site'
 import { LanguageProvider } from './contexts/LanguageContext'
 import { CartProvider } from './contexts/CartContext'
+import { shopConfig } from './shops/dogra-associates/config'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -30,23 +31,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: siteConfig.url,
-    title: 'Smart Digital Business Card',
-    description: 'One smart link for Call, WhatsApp, Location, Reviews, Menu and Payments.',
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
     siteName: siteConfig.name,
     images: [
       {
         url: `${siteConfig.url}/Frame 2147226119.png`,
         width: 1200,
         height: 630,
-        alt: 'MANGO - Pure Vegetarian • Budget Friendly • Bahu Plaza, Jammu',
+        alt: 'Dogra Associates | Ramit Khurana CA in Jammu',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Smart Digital Business Card',
-    description: 'One smart link for Call, WhatsApp, Location, Reviews, Menu and Payments.',
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
     images: [`${siteConfig.url}/Frame 2147226119.png`],
   },
   robots: {
@@ -69,10 +70,22 @@ export default function RootLayout({
   // JSON-LD structured data for LocalBusiness
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'AccountingService',
     name: siteConfig.name,
-    description: siteConfig.tagline,
     url: siteConfig.url,
+    description: siteConfig.seo.description,
+    provider: {
+      '@type': 'Person',
+      name: shopConfig.contactPersons?.[0]?.label || 'Ramit Khurana',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Jammu',
+    },
+    location: {
+      '@type': 'Place',
+      name: 'Jammu, India',
+    },
     telephone: `+91${siteConfig.contact.phones[0]}`,
     email: siteConfig.contact.email,
     address: {
@@ -82,12 +95,7 @@ export default function RootLayout({
       addressRegion: 'Jammu & Kashmir',
       addressCountry: 'IN',
     },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '06:00',
-      closes: '22:00',
-    },
+    serviceType: 'Tax advisory, GST filing, audit and compliance',
     sameAs: [
       siteConfig.social?.facebook,
       siteConfig.social?.instagram,

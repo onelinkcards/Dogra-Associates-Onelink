@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Star, ExternalLink } from 'lucide-react'
-import { shopConfig } from '../shops/honeys-fresh-n-frozen/config'
-import ReviewForm from '../shops/honeys-fresh-n-frozen/components/ReviewForm'
+import { shopConfig } from '../shops/dogra-associates/config'
+import ReviewForm from '../shops/dogra-associates/components/ReviewForm'
 
 interface Review {
   author_name: string

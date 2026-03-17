@@ -452,7 +452,7 @@ export default function Hero() {
                 >
                   <Image
                     src={shopConfig.assets.logo}
-                    alt={`${shopConfig.name} Logo`}
+                    alt="Chartered Accountant Jammu - Dogra Associates Logo"
                     width={128}
                     height={128}
                     className="w-full h-full object-contain"
@@ -480,33 +480,36 @@ export default function Hero() {
                   </p>
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
-                  <div className="flex flex-wrap gap-2 gap-y-1.5 mb-5">
+                  <div className="flex flex-wrap gap-2 gap-y-2 mb-4">
                     {shopConfig.keywordBadges.map((badge: string) => {
                       const isLong = badge.length > 10
                       const Icon = getKeywordBadgeIcon(badge)
                       return (
                         <span
                           key={badge}
-                          className={`inline-flex items-center gap-1 py-1 rounded-full text-[10px] font-medium ${isLong ? 'px-3' : 'px-2.5'}`}
+                          className={`inline-flex items-center gap-2 py-[6px] rounded-full text-[12px] font-medium ${
+                            isLong ? 'px-3' : 'px-3'
+                          }`}
                           style={{
                             background: 'rgba(30,64,175,0.1)',
                             color: '#1e40af',
                             border: '1px solid rgba(30,64,175,0.25)',
                           }}
                         >
-                          <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
+                          <Icon className="w-4 h-4 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
                           <span className="leading-none">{badge}</span>
                         </span>
                       )
                     })}
                     <span
-                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold whitespace-nowrap"
+                      className="inline-flex items-center gap-1.5 px-2 py-[4px] rounded-full text-[11px] font-bold whitespace-nowrap"
                       style={{
                         background: openStatus.isOpen ? 'rgba(34,197,94,0.14)' : 'rgba(239,68,68,0.14)',
                         color: openStatus.isOpen ? '#16a34a' : '#ef4444',
                         border: openStatus.isOpen ? '1px solid rgba(34,197,94,0.45)' : '1px solid rgba(239,68,68,0.45)',
                         boxShadow: openStatus.isOpen ? '0 10px 24px rgba(34,197,94,0.15)' : '0 10px 24px rgba(239,68,68,0.15)',
-                        letterSpacing: '0.1px',
+                        letterSpacing: '0.05px',
+                        lineHeight: 1.1,
                       }}
                       title={shopConfig?.contact?.storeHours || 'Office hours'}
                     >
@@ -515,11 +518,12 @@ export default function Hero() {
                         style={{ color: openStatus.isOpen ? '#16a34a' : '#ef4444' }}
                         strokeWidth={2.2}
                       />
-                      <span>{openStatus.isOpen ? 'Open now' : 'Closed now'}</span>
+                      <span style={{ whiteSpace: 'nowrap' }}>{openStatus.isOpen ? 'Open now' : 'Closed now'}</span>
                       <span
                         style={{
                           display: 'inline-block',
-                          fontSize: '10px',
+                          marginLeft: 6,
+                          fontSize: '9.5px',
                           fontWeight: 700,
                           opacity: 0.95,
                           whiteSpace: 'nowrap',

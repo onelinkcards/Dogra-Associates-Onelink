@@ -19,6 +19,7 @@ export default function UrgencyCTA() {
         title: 'Take Control of Your Tax & Compliance',
         badge: 'Tax & Compliance',
         bgImage: '/gallery/Green%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
+        bgAlt: 'Chartered Accountant Jammu',
         subtitle: 'From ITR filing to audits — we handle everything, stress-free.',
         ctaLabel: 'Start Now',
         action: 'scroll-services' as const,
@@ -29,6 +30,7 @@ export default function UrgencyCTA() {
         title: 'Avoid Penalties & Late Fees',
         badge: 'Deadline Protection',
         bgImage: '/gallery/Blue%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
+        bgAlt: 'GST Filing Services Jammu',
         subtitle: 'Stay compliant and never miss important deadlines.',
         ctaLabel: 'Book Consultation',
         action: 'to-services' as const,
@@ -39,6 +41,7 @@ export default function UrgencyCTA() {
         title: 'Expert CA Support, Anytime',
         badge: 'Expert Guidance',
         bgImage: '/gallery/Green%20and%20Yellow%20Modern%20Income%20Tax%20Filing%20Instagram%20Post.png',
+        bgAlt: 'Chartered Accountant Jammu',
         subtitle: 'Get personalized guidance for all your financial needs.',
         ctaLabel: 'Talk to Expert',
         action: 'to-services' as const,
@@ -111,17 +114,18 @@ export default function UrgencyCTA() {
         >
           <Image
             src={active.bgImage}
-            alt=""
+            alt={active.bgAlt}
             fill
             unoptimized
             priority={activeIndex === 0}
-            className="object-cover opacity-35 blur-3xl scale-[1.18]"
+            className="object-cover opacity-55 blur-2xl scale-[1.14]"
+            style={{ mixBlendMode: 'multiply' }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(135deg, rgba(15,23,42,0.42) 0%, rgba(30,64,175,0.18) 55%, rgba(255,255,255,0.06) 100%)',
+                'linear-gradient(135deg, rgba(15,23,42,0.28) 0%, rgba(30,64,175,0.14) 55%, rgba(255,255,255,0.12) 100%)',
             }}
           />
         </div>
@@ -230,9 +234,9 @@ export default function UrgencyCTA() {
                   playClickSound()
                   setActiveIndex(i)
                 }}
-                className="w-2.5 h-2.5 rounded-full transition-all"
+                className="w-2 h-2 rounded-full transition-all"
                 style={{
-                  background: isActive ? '#3A7BD5' : 'rgba(71,85,105,0.22)',
+                  background: isActive ? '#3A7BD5' : 'rgba(71,85,105,0.20)',
                   boxShadow: isActive ? '0 0 0 4px rgba(59,130,246,0.15)' : 'none',
                   transform: isActive ? 'scale(1.15)' : 'scale(1)',
                 }}
