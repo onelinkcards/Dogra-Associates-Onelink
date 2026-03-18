@@ -618,9 +618,6 @@ export default function Hero() {
                 <h2 className="text-xl sm:text-2xl font-black mb-4 pt-1 pb-1 tracking-wide text-white text-center w-full [text-shadow:0_1px_3px_rgba(0,0,0,0.25)]">
                   Business Overview
                 </h2>
-                <p className="text-xs sm:text-sm leading-relaxed text-white/90 text-center mb-4 w-full">
-                  Chartered Accountancy support for income tax, GST filing, compliance and audits in Jammu.
-                </p>
 
                 {/* Block 1: Location – glass block, icon in square */}
                 <div className="flex items-start gap-3 w-full mb-3 rounded-2xl p-3 sm:p-4 bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_4px_14px_rgba(0,0,0,0.12)]">
