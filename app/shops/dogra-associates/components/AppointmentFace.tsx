@@ -241,10 +241,12 @@ Please confirm the appointment.`
             type="button"
             onClick={handleSubmit}
             disabled={!isValid}
-            className="w-full rounded-xl py-3.5 font-semibold text-[16px] text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all touch-manipulation active:scale-[0.99]"
+            className="w-full rounded-xl py-3.5 font-semibold text-[16px] text-white border border-[#3B82F6]/60 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all touch-manipulation active:scale-[0.99] hover:brightness-[1.04]"
             style={{
               background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)',
               boxShadow: '0 6px 16px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)',
+              // Helps the button look "button-y" on light gradients too.
+              outline: '1px solid rgba(255,255,255,0.18)',
               marginTop: 20,
               WebkitTapHighlightColor: 'transparent',
             }}

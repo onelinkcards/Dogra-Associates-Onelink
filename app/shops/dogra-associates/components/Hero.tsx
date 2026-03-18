@@ -480,28 +480,28 @@ export default function Hero() {
                   </p>
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="flex flex-nowrap items-center gap-1 min-w-0">
+                  <div className="flex flex-col items-start gap-2 mb-4 w-full">
+                    <div className="flex flex-nowrap items-center gap-1">
                       {shopConfig.keywordBadges.map((badge: string) => {
                         const Icon = getKeywordBadgeIcon(badge)
                         return (
                           <span
                             key={badge}
-                            className="inline-flex items-center gap-1.25 px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
+                            className="inline-flex items-center gap-[5px] px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
                             style={{
                               background: 'rgba(30,64,175,0.1)',
                               color: '#1e40af',
                               border: '1px solid rgba(30,64,175,0.25)',
                             }}
                           >
-                            <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
+                            <Icon className="w-4 h-4 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
                             <span className="leading-none">{badge}</span>
                           </span>
                         )
                       })}
                     </div>
                     <span
-                      className="inline-flex items-center gap-2 px-2.5 py-[4px] rounded-full text-[12px] font-bold whitespace-nowrap"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-[4px] rounded-full text-[12px] font-bold whitespace-nowrap flex-shrink-0"
                       style={{
                         background: openStatus.isOpen ? 'rgba(34,197,94,0.14)' : 'rgba(239,68,68,0.14)',
                         color: openStatus.isOpen ? '#16a34a' : '#ef4444',
@@ -522,8 +522,8 @@ export default function Hero() {
                         style={{
                           display: 'inline-block',
                           marginLeft: 0,
-                          fontSize: '9.3px',
-                          fontWeight: 700,
+                          fontSize: '10px',
+                          fontWeight: 800,
                           opacity: 0.95,
                           whiteSpace: 'nowrap',
                         }}

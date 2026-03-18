@@ -107,8 +107,7 @@ export default function MenuPreview() {
             boxShadow: '0 10px 25px rgba(59, 130, 246, 0.35)',
           }}
         >
-          View All Services
-          <ArrowRight className="w-5 h-5 flex-shrink-0" />
+          View Services
         </Link>
         <Link
           href="/services"
