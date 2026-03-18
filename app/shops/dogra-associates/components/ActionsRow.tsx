@@ -326,7 +326,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
           </Link>
         </div>
 
-        {/* Row 4: Location | Gallery */}
+        {/* Row 4: Location | Share */}
         <div className="grid grid-cols-2 gap-2 w-full min-w-0">
           <Button
             title="Find our office"
@@ -352,58 +352,24 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
             <MapPin className="w-5 h-5 shrink-0" style={{ color: '#EF4444' }} />
             <span className="text-sm font-bold truncate" style={{ color: '#0F172A', fontSize: '14px' }}>{t('officeLocation')}</span>
           </Button>
-          <Link
-            href="/gallery"
-            onClick={(e) => {
-              e.stopPropagation()
-              playClickSound()
-            }}
-            title="View gallery"
-            className="min-w-0 h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-1.5 sm:gap-2 active:scale-[0.97] touch-manipulation"
+          <Button
+            title="Share this contact"
+            onClick={handleShare}
+            className="w-full min-w-0 h-11 bg-white/90 hover:bg-white backdrop-blur-md text-slate-700 rounded-2xl border-2 border-blue-400/60 hover:border-blue-600/70 relative overflow-hidden touch-manipulation flex items-center justify-center gap-2 transition-[transform,box-shadow,background-color] duration-150 ease-out"
             style={{
-              color: '#0F172A',
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               borderRadius: '16px',
-              WebkitTapHighlightColor: 'transparent',
               fontSize: '14px',
-              transform: 'translateY(-1px)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
-              e.currentTarget.style.transform = 'translateY(-2px)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
-              e.currentTarget.style.transform = 'translateY(-1px)'
+              WebkitTapHighlightColor: 'transparent',
+              transform: 'translateY(-1px)',
             }}
           >
-            <div className="flex items-center -space-x-1.5 relative z-10">
-              <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center overflow-hidden relative"
-                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
-              >
-                <img
-                  src="/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.25.jpeg"
-                  alt="Gallery"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-              <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center overflow-hidden relative"
-                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
-              >
-                <img
-                  src="/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.31.jpeg"
-                  alt="Gallery"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-            </div>
-            <span className="text-sm font-bold truncate" style={{ color: '#0F172A', fontSize: '14px' }}>{t('gallery')}</span>
-          </Link>
+            <Share2 className="w-4 h-4 relative z-10" style={{ color: '#1E40AF' }} />
+            <span className="text-sm font-bold relative z-10 truncate" style={{ fontSize: '14px' }}>Share</span>
+          </Button>
         </div>
 
-        {/* Row 5: Save Contact + Share */}
+        {/* Row 5: Save Contact + Gallery */}
         <div className="grid grid-cols-2 gap-2 w-full min-w-0">
           <Button
             title="Save contact to your phone"
@@ -432,21 +398,57 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
             </span>
           </Button>
 
-          <Button
-            title="Share this contact"
-            onClick={handleShare}
-            className="w-full min-w-0 h-11 bg-white/90 hover:bg-white backdrop-blur-md text-slate-700 rounded-2xl border-2 border-blue-400/60 hover:border-blue-600/70 relative overflow-hidden touch-manipulation flex items-center justify-center gap-2 transition-[transform,box-shadow,background-color] duration-150 ease-out"
+          <Link
+            href="/gallery"
+            onClick={(e) => {
+              e.stopPropagation()
+              playClickSound()
+            }}
+            title="View gallery"
+            className="min-w-0 h-11 bg-white/90 backdrop-blur-md hover:bg-white rounded-2xl transition-all flex items-center justify-center gap-1.5 sm:gap-2 active:scale-[0.97] touch-manipulation"
             style={{
+              color: '#0F172A',
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               borderRadius: '16px',
-              fontSize: '14px',
               WebkitTapHighlightColor: 'transparent',
+              fontSize: '14px',
               transform: 'translateY(-1px)',
             }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+              e.currentTarget.style.transform = 'translateY(-1px)'
+            }}
           >
-            <Share2 className="w-4 h-4 relative z-10" style={{ color: '#1E40AF' }} />
-            <span className="text-sm font-bold relative z-10 truncate" style={{ fontSize: '14px' }}>Share</span>
-          </Button>
+            <div className="flex items-center -space-x-1.5 relative z-10">
+              <div
+                className="w-7 h-7 rounded-full bg-white flex items-center justify-center overflow-hidden relative"
+                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
+              >
+                <img
+                  src="/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.25.jpeg"
+                  alt="Gallery"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <div
+                className="w-7 h-7 rounded-full bg-white flex items-center justify-center overflow-hidden relative"
+                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
+              >
+                <img
+                  src="/gallery/WhatsApp%20Image%202026-03-15%20at%2021.23.31.jpeg"
+                  alt="Gallery"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+            </div>
+            <span className="text-sm font-bold truncate" style={{ color: '#0F172A', fontSize: '14px' }}>{t('gallery')}</span>
+          </Link>
         </div>
 
         {/* Call Selector - Bottom Pop-out */}
