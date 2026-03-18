@@ -118,36 +118,16 @@ export default function UrgencyCTA() {
             fill
             unoptimized
             priority={activeIndex === 0}
-            className="object-cover opacity-55 blur-2xl scale-[1.14]"
-            style={{ mixBlendMode: 'multiply' }}
+            className="object-cover opacity-70 blur-2xl scale-[1.14]"
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(135deg, rgba(15,23,42,0.28) 0%, rgba(30,64,175,0.14) 55%, rgba(255,255,255,0.12) 100%)',
+                'linear-gradient(135deg, rgba(30,64,175,0.18) 0%, rgba(255,255,255,0.14) 100%)',
             }}
           />
         </div>
-
-        {/* Shiny top edge */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-1/2 opacity-60 pointer-events-none"
-          style={{
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 100%)',
-          }}
-        />
-
-        {/* Subtle indigo glow on hover */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-br from-indigo-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(59,130,246,0.06) 55%, rgba(255,255,255,0) 100%)',
-          }}
-        />
 
         <div className="relative z-10 flex items-start gap-4">
           {/* Left icon */}
