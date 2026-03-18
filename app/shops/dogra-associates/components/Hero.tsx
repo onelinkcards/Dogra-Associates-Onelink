@@ -480,14 +480,15 @@ export default function Hero() {
                   </p>
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
-                  <div className="flex flex-col items-start gap-2 mb-4 w-full">
-                    <div className="flex flex-nowrap items-center gap-1">
+                  <div className="flex flex-col gap-2 mb-4 w-full">
+                    {/* Row 1: exactly 2 keyword badges side-by-side */}
+                    <div className="grid grid-cols-2 gap-2 items-center w-full">
                       {shopConfig.keywordBadges.map((badge: string) => {
                         const Icon = getKeywordBadgeIcon(badge)
                         return (
                           <span
                             key={badge}
-                            className="inline-flex items-center gap-[5px] px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
+                            className="inline-flex w-fit justify-self-start items-center gap-[5px] px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
                             style={{
                               background: 'rgba(30,64,175,0.1)',
                               color: '#1e40af',
@@ -501,7 +502,7 @@ export default function Hero() {
                       })}
                     </div>
                     <span
-                      className="inline-flex items-center gap-1.5 px-2.5 py-[4px] rounded-full text-[12px] font-bold whitespace-nowrap flex-shrink-0"
+                      className="inline-flex w-fit self-start items-center gap-1.5 px-2.5 py-[4px] rounded-full text-[12px] font-bold whitespace-nowrap flex-shrink-0"
                       style={{
                         background: openStatus.isOpen ? 'rgba(34,197,94,0.14)' : 'rgba(239,68,68,0.14)',
                         color: openStatus.isOpen ? '#16a34a' : '#ef4444',
