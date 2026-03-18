@@ -159,7 +159,7 @@ Please confirm the appointment.`
           </p>
         )}
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div>
             <label className="block text-[15px] font-semibold mb-1.5" style={{ color: '#1E3A8A' }}>Name</label>
             <input
@@ -237,7 +237,6 @@ Please confirm the appointment.`
               boxShadow: '0 6px 16px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)',
               // Helps the button look "button-y" on light gradients too.
               outline: '1px solid rgba(255,255,255,0.18)',
-              marginTop: 20,
               WebkitTapHighlightColor: 'transparent',
             }}
           >
@@ -248,7 +247,7 @@ Please confirm the appointment.`
           <button
             type="button"
             onClick={onBack}
-            className="w-full rounded-xl py-2.5 font-semibold text-[14px] text-[#1E40AF] border border-[#3B82F6]/30 bg-white/35 hover:bg-white/55 backdrop-blur-sm transition-all touch-manipulation active:scale-[0.99]"
+            className="w-full rounded-xl py-3 font-semibold text-[15px] text-[#1E40AF] border border-[#3B82F6]/25 bg-white/35 hover:bg-white/55 backdrop-blur-sm transition-all touch-manipulation active:scale-[0.99] flex items-center justify-center gap-2"
             style={{ WebkitTapHighlightColor: 'transparent' }}
             aria-label="Back"
           >
