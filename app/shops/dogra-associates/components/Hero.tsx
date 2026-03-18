@@ -482,13 +482,13 @@ export default function Hero() {
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
                   <div className="flex flex-col gap-2 mb-4 w-full">
                     {/* Row 1: exactly 2 keyword badges side-by-side */}
-                    <div className="grid grid-cols-2 gap-2 items-center w-full">
+                    <div className="flex flex-nowrap items-center gap-2 w-full">
                       {shopConfig.keywordBadges.map((badge: string) => {
                         const Icon = getKeywordBadgeIcon(badge)
                         return (
                           <span
                             key={badge}
-                            className="inline-flex w-fit justify-self-start items-center gap-[5px] px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
+                            className="inline-flex w-fit items-center gap-[5px] px-2 py-[4px] rounded-full text-[11px] font-medium whitespace-nowrap"
                             style={{
                               background: 'rgba(30,64,175,0.1)',
                               color: '#1e40af',
