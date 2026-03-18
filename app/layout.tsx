@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/Frame 2147226119.png`,
+        url: `${siteConfig.url}/gallery/onelinklogo.png`,
         width: 1200,
         height: 630,
         alt: 'Dogra Associates | Ramit Khurana CA in Jammu',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
-    images: [`${siteConfig.url}/Frame 2147226119.png`],
+    images: [`${siteConfig.url}/gallery/onelinklogo.png`],
   },
   robots: {
     index: true,

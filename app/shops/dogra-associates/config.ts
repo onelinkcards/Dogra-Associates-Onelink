@@ -22,7 +22,7 @@ export const shopConfig = {
   snapshotHours: "Mon–Sat 10:30 AM – 7:00 PM",
   url: "https://carammit.onelink.cards",
   cardType: "B2C" as const,
-  keywordBadges: ["ICAI Registered", "20+ Years Experience", "Tax & GST Expert"] as string[],
+  keywordBadges: ["20+ Years Experience", "Tax & GST Expert"] as string[],
 
   contact: {
     phones: ["9086038829", "9419238829"],

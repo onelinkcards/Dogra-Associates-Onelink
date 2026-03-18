@@ -480,23 +480,20 @@ export default function Hero() {
                   </p>
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
-                  <div className="flex flex-wrap gap-2 gap-y-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5 gap-y-1.5 mb-4">
                     {shopConfig.keywordBadges.map((badge: string) => {
-                      const isLong = badge.length > 10
                       const Icon = getKeywordBadgeIcon(badge)
                       return (
                         <span
                           key={badge}
-                          className={`inline-flex items-center gap-2 py-[6px] rounded-full text-[12px] font-medium ${
-                            isLong ? 'px-3' : 'px-3'
-                          }`}
+                          className="inline-flex items-center gap-1.5 px-2 py-[4px] rounded-full text-[11.5px] font-medium whitespace-nowrap"
                           style={{
                             background: 'rgba(30,64,175,0.1)',
                             color: '#1e40af',
                             border: '1px solid rgba(30,64,175,0.25)',
                           }}
                         >
-                          <Icon className="w-4 h-4 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
+                          <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#1e40af' }} strokeWidth={2} />
                           <span className="leading-none">{badge}</span>
                         </span>
                       )
