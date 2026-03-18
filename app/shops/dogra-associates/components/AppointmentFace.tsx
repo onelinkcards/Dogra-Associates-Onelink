@@ -146,6 +146,14 @@ Please confirm the appointment.`
       }}
     >
       <div className="flex-1 overflow-y-auto">
+        <h2 className="font-bold mb-1.5" style={{ fontSize: 22, color: '#1E3A8A' }}>
+          Book Consultation
+        </h2>
+        <p className="text-base font-medium mb-5 leading-snug" style={{ color: '#1E40AF' }}>
+          with Ramit Khurana — Chartered Accountant
+        </p>
+        
+        {/* Back button (moved below title section, so it's not at the very top) */}
         <button
           type="button"
           onClick={onBack}
@@ -157,12 +165,6 @@ Please confirm the appointment.`
           Back
         </button>
 
-        <h2 className="font-bold mb-1.5" style={{ fontSize: 22, color: '#1E3A8A' }}>
-          Book Consultation
-        </h2>
-        <p className="text-base font-medium mb-5 leading-snug" style={{ color: '#1E40AF' }}>
-          with Ramit Khurana — Chartered Accountant
-        </p>
         {selectedServicesFromPage.length > 0 && (
           <p className="text-sm font-semibold mb-3" style={{ color: '#334155' }}>
             Including: {selectedServicesFromPage.join(', ')}
