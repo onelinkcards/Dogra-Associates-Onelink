@@ -152,18 +152,6 @@ Please confirm the appointment.`
         <p className="text-base font-medium mb-5 leading-snug" style={{ color: '#1E40AF' }}>
           with Ramit Khurana — Chartered Accountant
         </p>
-        
-        {/* Back button (moved below title section, so it's not at the very top) */}
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center gap-1.5 text-[15px] font-semibold transition-colors touch-manipulation mb-4"
-          style={{ WebkitTapHighlightColor: 'transparent', color: '#1E40AF' }}
-          aria-label="Back"
-        >
-          <ArrowLeft className="w-4 h-4 flex-shrink-0" />
-          Back
-        </button>
 
         {selectedServicesFromPage.length > 0 && (
           <p className="text-sm font-semibold mb-3" style={{ color: '#334155' }}>
@@ -254,6 +242,18 @@ Please confirm the appointment.`
             }}
           >
             Confirm Appointment
+          </button>
+
+          {/* Back button: only below Confirm Appointment (no top back) */}
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-full rounded-xl py-2.5 font-semibold text-[14px] text-[#1E40AF] border border-[#3B82F6]/30 bg-white/35 hover:bg-white/55 backdrop-blur-sm transition-all touch-manipulation active:scale-[0.99]"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+            aria-label="Back"
+          >
+            <ArrowLeft className="w-4 h-4 flex-shrink-0" />
+            Back
           </button>
         </div>
       </div>
