@@ -21,47 +21,17 @@ export default function Home() {
   const [showLoading, setShowLoading] = useState(true)
 
   useEffect(() => {
-    // Check if coming from gallery, services, or reviews page - skip loading screen
+    // Back from gallery / services / reviews: show hero card at top, skip long loading
     if (typeof window !== 'undefined') {
-      let fromGallery: string | null = null
-      let fromServices: string | null = null
-      let fromReviews: string | null = null
       try {
-        fromGallery = sessionStorage.getItem('fromGallery')
-        fromServices = sessionStorage.getItem('fromServices')
-        fromReviews = sessionStorage.getItem('fromReviews')
+        if (sessionStorage.getItem('homeBackSkipLoad') === 'true') {
+          sessionStorage.removeItem('homeBackSkipLoad')
+          setShowLoading(false)
+          window.scrollTo(0, 0)
+          return
+        }
       } catch {
         // sessionStorage may be unavailable
-      }
-      
-      if (fromGallery === 'true') {
-        // Skip loading screen when coming from gallery
-        setShowLoading(false)
-        sessionStorage.removeItem('fromGallery')
-        
-        // Scroll to gallery section
-        setTimeout(() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }), 100)
-        return
-      }
-      
-      if (fromServices === 'true') {
-        // Skip loading screen when coming from services page
-        setShowLoading(false)
-        sessionStorage.removeItem('fromServices')
-        
-        // Scroll to services section
-        setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100)
-        return
-      }
-      
-      if (fromReviews === 'true') {
-        // Skip loading screen when coming from reviews
-        setShowLoading(false)
-        sessionStorage.removeItem('fromReviews')
-        
-        // Scroll to reviews section
-        setTimeout(() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }), 100)
-        return
       }
     }
 

@@ -8,6 +8,7 @@ import { ArrowLeft, Check } from 'lucide-react'
 import { serviceCategories } from '../shops/dogra-associates/services'
 import { shopConfig } from '../shops/dogra-associates/config'
 import { getWhatsAppLink } from '../lib/phone'
+import { prepareReturnToHeroCard } from '../lib/homeNavigation'
 import type { ServiceCategoryKey, ServiceItem } from '../shops/dogra-associates/services'
 
 const categoryKeys: ServiceCategoryKey[] = [
@@ -193,14 +194,10 @@ function ServicesPageInner() {
           {/* 1. Header */}
           <header className="mb-6">
             <Link
-              href="/#services"
+              href="/"
               className="inline-flex items-center gap-2 min-h-[44px] py-2 -ml-1 pr-2 text-[15px] font-semibold transition-colors rounded-lg touch-manipulation"
               style={{ color: ACCENT }}
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  sessionStorage.setItem('fromServices', 'true')
-                }
-              }}
+              onClick={() => prepareReturnToHeroCard()}
             >
               <ArrowLeft className="w-5 h-5 shrink-0" strokeWidth={2.5} />
               Back

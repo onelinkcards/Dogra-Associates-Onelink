@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ChevronLeft, ChevronRight, X, Image as ImageIcon, Video } from 'lucide-react'
+import { prepareReturnToHeroCard } from '../lib/homeNavigation'
 
 // Gallery images from public/gallery folder
 const galleryImages = [
@@ -84,14 +85,10 @@ export default function GalleryPage() {
         >
           <div className="max-w-md mx-auto px-2 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
             <Link
-              href="/#gallery"
+              href="/"
               className="p-2.5 sm:p-3 rounded-full transition-colors"
               style={{ color: '#E5E7EB' }}
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  sessionStorage.setItem('fromGallery', 'true')
-                }
-              }}
+              onClick={() => prepareReturnToHeroCard()}
             >
               <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: '#93C5FD' }} />
             </Link>

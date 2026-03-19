@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Star, ExternalLink } from 'lucide-react'
 import { shopConfig } from '../shops/dogra-associates/config'
+import { prepareReturnToHeroCard } from '../lib/homeNavigation'
 import ReviewForm from '../shops/dogra-associates/components/ReviewForm'
 
 interface Review {
@@ -101,13 +102,9 @@ export default function ReviewsPage() {
       }}>
         <div className="max-w-md mx-auto px-2 py-4 flex items-center gap-3">
           <Link
-            href="/#reviews"
+            href="/"
             className="p-3 rounded-full transition-colors hover:bg-black/5"
-            onClick={() => {
-              if (typeof window !== 'undefined') {
-                sessionStorage.setItem('fromReviews', 'true')
-              }
-            }}
+            onClick={() => prepareReturnToHeroCard()}
           >
             <ArrowLeft className="w-7 h-7 text-slate-800" />
           </Link>
@@ -166,6 +163,7 @@ export default function ReviewsPage() {
             <Link
               href="/"
               className="transition-colors font-medium text-slate-600 hover:text-slate-800"
+              onClick={() => prepareReturnToHeroCard()}
             >
               Return to Home
             </Link>
