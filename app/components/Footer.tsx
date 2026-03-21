@@ -27,7 +27,7 @@ export default function Footer() {
               <span>— your business, one link away.</span>
             </p>
             <Link
-              href="https://repixelx.com/about"
+              href="https://repixelx.com"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => playClickSound()}

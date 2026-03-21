@@ -1,7 +1,16 @@
 {
-  "name": "fitness-valley",
+  "name": "dogra-associates-onelink",
   "version": "1.0.0",
   "private": true,
+  "description": "Dogra Associates OneLink digital card (Next.js)",
+  "homepage": "https://caramit.onelink.cards/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onelinkcards/Dogra-Associates-Onelink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/onelinkcards/Dogra-Associates-Onelink/issues"
+  },
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",

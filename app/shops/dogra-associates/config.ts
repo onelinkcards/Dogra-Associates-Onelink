@@ -1,6 +1,8 @@
 // Shop Configuration for Dogra Associates – Chartered Accountant
 // All shop-specific data lives here (per ONELINK_DESIGN_GUIDE Section 8 & 9)
 
+import { PUBLIC_SITE_URL } from '../../lib/public-site-url'
+
 export type ContactPersonLabel = "Ramit Khurana" | "Office"
 
 export interface ContactPerson {
@@ -20,7 +22,7 @@ export const shopConfig = {
   snapshotServicesLine:
     "Income Tax • GST Filing • GST Returns • TDS/TCS • Audit & Compliance • Company/LLP Registration",
   snapshotHours: "Mon–Sat 10:30 AM – 7:00 PM",
-  url: "https://carammit.onelink.cards",
+  url: PUBLIC_SITE_URL,
   cardType: "B2C" as const,
   keywordBadges: ["20+ Years Experience", "Tax & GST Expert"] as string[],
 

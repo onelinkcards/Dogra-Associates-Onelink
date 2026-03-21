@@ -1,5 +1,7 @@
 // Site config for Footer and shared refs (per ONELINK_DESIGN_GUIDE Section 9)
 
+import { PUBLIC_SITE_URL } from '../lib/public-site-url'
+
 export type ContactPersonLabel = "Ramit Khurana" | "Office"
 
 export interface ContactPerson {
@@ -12,7 +14,7 @@ export interface ContactPerson {
 export const siteConfig = {
   name: "Dogra Associates",
   tagline: "Ramit Khurana – Chartered Accountant",
-  url: "https://carammit.onelink.cards",
+  url: PUBLIC_SITE_URL,
 
   contact: {
     phones: ["9086038829", "9419238829"],
